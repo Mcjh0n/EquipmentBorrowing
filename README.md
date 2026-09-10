@@ -8,7 +8,7 @@ It only shows the basic structure and logic of the system.
 
 ## 1. Solution Structure
 
-The project is split into 4 parts. Each part has its own job.
+The solution has four layers plus a small console program that demonstrates the borrowing use case. Each part has its own job.
 
 ### Domain
 This is the most important part.
@@ -32,6 +32,10 @@ This part depends on both the Domain and Application parts.
 This part holds the tests that check if the system works correctly.
 It depends on the Domain and Application parts.
 
+### ConsoleDemo
+This is the executable composition root. It creates the in-memory repositories, passes them to `BorrowEquipmentService`, and runs both successful and unsuccessful borrowing requests.
+It depends on the Domain, Application, and Infrastructure projects so it can wire the layers together manually.
+
 ---
 
 ## 2. Dependency Direction
@@ -39,21 +43,19 @@ It depends on the Domain and Application parts.
 This shows which part depends on which other part:
 
 ```
-ConsoleDemo (or Future UI)
-         |
-         v
-     Application
-      |       |
-      v       |
-    Domain    |
+ConsoleDemo (or future Avalonia UI)
               |
-      Infrastructure
+              v
+        Application <--- Infrastructure
+              |
+              v
+            Domain
 ```
 
 - **Domain** does not need any other part.
 - **Application** only needs the Domain part.
 - **Infrastructure** needs both the Domain and Application parts.
-- **ConsoleDemo** needs all three parts to run the program.
+- **ConsoleDemo** references all three layers only to compose the concrete infrastructure implementations with the application service.
 
 ---
 

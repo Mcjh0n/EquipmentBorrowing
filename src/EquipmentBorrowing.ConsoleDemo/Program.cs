@@ -1,80 +1,54 @@
-﻿Console.WriteLine("Hello, World!");
+using EquipmentBorrowing.Application.Services;
+using EquipmentBorrowing.Infrastructure.Repositories;
 
+var studentRepository = new InMemoryStudentRepository();
+var equipmentRepository = new InMemoryEquipmentRepository();
+var borrowingRepository = new InMemoryBorrowingRepository();
 
-// src/EquipmentBorrowing.ConsoleDemo/Program.cs
+var borrowService = new BorrowEquipmentService(
+    studentRepository,
+    equipmentRepository,
+    borrowingRepository);
 
-// using EquipmentBorrowing.Application.Services;
-// using EquipmentBorrowing.Infrastructure.Repositories;
+var expectedReturnDate = DateTime.Today.AddDays(7);
 
-// // --- Wire up dependencies manually (no DI container needed) ---
-// var studentRepository    = new InMemoryStudentRepository();
-// var equipmentRepository  = new InMemoryEquipmentRepository();
-// var borrowingRepository  = new InMemoryBorrowingRepository();
+Console.WriteLine("Campus Equipment Borrowing System Demo");
+Console.WriteLine(new string('=', 40));
+Console.WriteLine($"Expected return date: {expectedReturnDate:MMMM dd, yyyy}");
+Console.WriteLine();
 
-// var borrowService = new BorrowEquipmentService(
-//     studentRepository,
-//     equipmentRepository,
-//     borrowingRepository);
+var firstBorrowing = await borrowService.ExecuteAsync(
+    studentId: 1,
+    equipmentId: 1,
+    expectedReturnDate: expectedReturnDate);
+PrintResult("1. Alice borrows the available Oscilloscope", firstBorrowing.IsSuccess, firstBorrowing.Message);
 
-// var returnDate = DateTime.Now.AddDays(7);
+var unavailableEquipment = await borrowService.ExecuteAsync(
+    studentId: 2,
+    equipmentId: 1,
+    expectedReturnDate: expectedReturnDate);
+PrintResult("2. Bob requests the already borrowed Oscilloscope", unavailableEquipment.IsSuccess, unavailableEquipment.Message);
 
-// Console.WriteLine("===========================================");
-// Console.WriteLine("  Campus Equipment Borrowing System Demo  ");
-// Console.WriteLine("===========================================\n");
+var ineligibleStudent = await borrowService.ExecuteAsync(
+    studentId: 3,
+    equipmentId: 2,
+    expectedReturnDate: expectedReturnDate);
+PrintResult("3. Carlos requests the Multimeter", ineligibleStudent.IsSuccess, ineligibleStudent.Message);
 
-// // ✅ SUCCESS CASE 1: Valid student borrows available equipment
-// Console.WriteLine(">>> CASE 1: Alice (authorized) borrows the Oscilloscope");
-// var result1 = await borrowService.ExecuteAsync(
-//     studentId: 1,
-//     equipmentId: 1,
-//     expectedReturnDate: returnDate);
+var missingEquipment = await borrowService.ExecuteAsync(
+    studentId: 1,
+    equipmentId: 999,
+    expectedReturnDate: expectedReturnDate);
+PrintResult("4. Alice requests equipment that does not exist", missingEquipment.IsSuccess, missingEquipment.Message);
 
-// Console.WriteLine(result1.IsSuccess ? $"✅ SUCCESS: {result1.Message}" : $"❌ FAILED:  {result1.Message}");
+var secondBorrowing = await borrowService.ExecuteAsync(
+    studentId: 2,
+    equipmentId: 2,
+    expectedReturnDate: expectedReturnDate);
+PrintResult("5. Bob borrows the available Multimeter", secondBorrowing.IsSuccess, secondBorrowing.Message);
 
-// Console.WriteLine();
-
-// // ❌ FAILURE CASE 1: Equipment already borrowed (not available)
-// Console.WriteLine(">>> CASE 2: Bob tries to borrow the same Oscilloscope (already borrowed)");
-// var result2 = await borrowService.ExecuteAsync(
-//     studentId: 2,
-//     equipmentId: 1,
-//     expectedReturnDate: returnDate);
-
-// Console.WriteLine(result2.IsSuccess ? $"✅ SUCCESS: {result2.Message}" : $"❌ FAILED:  {result2.Message}");
-
-// Console.WriteLine();
-
-// // ❌ FAILURE CASE 2: Student not allowed to borrow
-// Console.WriteLine(">>> CASE 3: Carlos (not authorized) tries to borrow the Multimeter");
-// var result3 = await borrowService.ExecuteAsync(
-//     studentId: 3,
-//     equipmentId: 2,
-//     expectedReturnDate: returnDate);
-
-// Console.WriteLine(result3.IsSuccess ? $"✅ SUCCESS: {result3.Message}" : $"❌ FAILED:  {result3.Message}");
-
-// Console.WriteLine();
-
-// // ❌ FAILURE CASE 3: Equipment does not exist
-// Console.WriteLine(">>> CASE 4: Alice tries to borrow Equipment ID 999 (does not exist)");
-// var result4 = await borrowService.ExecuteAsync(
-//     studentId: 1,
-//     equipmentId: 999,
-//     expectedReturnDate: returnDate);
-
-// Console.WriteLine(result4.IsSuccess ? $"✅ SUCCESS: {result4.Message}" : $"❌ FAILED:  {result4.Message}");
-
-// Console.WriteLine();
-
-// // ✅ SUCCESS CASE 2: Bob borrows a different available equipment
-// Console.WriteLine(">>> CASE 5: Bob (authorized) borrows the Multimeter");
-// var result5 = await borrowService.ExecuteAsync(
-//     studentId: 2,
-//     equipmentId: 2,
-//     expectedReturnDate: returnDate);
-
-// Console.WriteLine(result5.IsSuccess ? $"✅ SUCCESS: {result5.Message}" : $"❌ FAILED:  {result5.Message}");
-
-// Console.WriteLine("\n===========================================");
-// Console.WriteLine("             Demo Complete                 ");
-// Console.WriteLine("===========================================");
+static void PrintResult(string scenario, bool isSuccess, string message)
+{
+    var outcome = isSuccess ? "SUCCESS" : "FAILED";
+    Console.WriteLine($"{scenario}\n   {outcome}: {message}\n");
+}
