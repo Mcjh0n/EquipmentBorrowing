@@ -3,20 +3,69 @@
         xmlns:vm="using:EquipmentBorrowing.Desktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
         x:Class="EquipmentBorrowing.Desktop.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="EquipmentBorrowing.Desktop">
+        Title="Campus Equipment Borrowing System"
+        Width="1000"
+        Height="650"
+        MinWidth="800"
+        MinHeight="500">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <Grid RowDefinitions="Auto,*">
+        <Border Grid.Row="0"
+                Background="#1F4E78"
+                Padding="24,16">
+            <TextBlock Text="Campus Equipment Borrowing System"
+                       FontSize="24"
+                       FontWeight="SemiBold"
+                       Foreground="White" />
+        </Border>
 
+        <Grid Grid.Row="1"
+              ColumnDefinitions="220,*">
+            <Border Grid.Column="0"
+                    Background="#F2F4F7"
+                    Padding="16">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Navigation"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8" />
+
+                    <Button Content="Equipment"
+                            Command="{Binding ShowEquipmentCommand}"
+                            HorizontalAlignment="Stretch" />
+
+                    <Button Content="Active Borrowings"
+                            Command="{Binding ShowBorrowingsCommand}"
+                            HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Padding="28">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{Binding CurrentSection}"
+                               FontSize="26"
+                               FontWeight="SemiBold" />
+
+                    <TextBlock Text="{Binding CurrentSectionDescription}"
+                               FontSize="15"
+                               TextWrapping="Wrap" />
+
+                    <Border Background="#F7F9FC"
+                            CornerRadius="6"
+                            Padding="20">
+                        <TextBlock Text="The selected screen will appear here in the next parts of the activity."
+                                   TextWrapping="Wrap" />
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
 </Window>
