@@ -104,3 +104,117 @@ If we put database code inside a button, the code becomes messy and hard to fix 
 The `BorrowEquipmentService.ExecuteAsync` method is the main action.
 It checks all the rules — like if the student is allowed to borrow, if the equipment is available, and if the student has not borrowed too many items already.
 If all checks pass, it saves the borrowing record.
+
+---
+
+## 5. Laboratory Activity 2 - Avalonia UI and MVVM
+
+### Activity 1 Note
+
+The earlier part of this README says that the project has no visual interface.
+That was true in Activity 1.
+
+Activity 2 adds an Avalonia desktop application. The project still uses in-memory data, so it does not use a real database yet.
+
+### What Was Added
+
+The new desktop project is `src/EquipmentBorrowing.Desktop`.
+
+The application can:
+
+- Show available equipment
+- Let a user choose a student, equipment, and return date
+- Borrow equipment
+- Show active borrowings
+- Return selected equipment
+- Show success and error messages
+
+### MVVM and Application Flow
+
+The desktop application uses the MVVM pattern.
+
+```text
+View
+  |
+  v
+ViewModel
+  |
+  v
+Application Service
+  |
+  v
+Repository Interface
+  |
+  v
+In-Memory Repository
+```
+
+- The **View** is the screen that the user sees.
+- The **ViewModel** holds screen data and commands.
+- The **Application Service** performs borrowing and return actions.
+- The **Repository Interface** is the contract for getting and saving data.
+- The **In-Memory Repository** stores data while the application is open.
+
+The View does not contain borrowing rules. The ViewModel calls the application services instead of directly using a repository.
+
+### Dependency Injection
+
+`App.axaml.cs` connects the ViewModels, application services, and repositories.
+
+The repositories are registered as singletons. This means the Equipment page and Active Borrowings page use the same data while the app is open.
+
+### How to Run the Application
+
+Open a terminal in the project folder and run:
+
+```powershell
+dotnet build EquipmentBorrowing.slnx
+dotnet run --project src/EquipmentBorrowing.Desktop
+```
+
+### Screenshots
+![alt text](image.png)
+
+#### Equipment Page
+
+The Equipment page shows available equipment and the borrow form.
+
+![alt text](image-1.png)
+
+#### Active Borrowings After Borrowing
+
+This page shows the active borrowing records after equipment was borrowed.
+
+![alt text](image-2.png)
+
+#### Successful Return
+
+This message shows that the Oscilloscope was returned successfully.
+
+![alt text](image-3.png)
+
+#### Handled Validation Error
+
+This message shows a rule check. The selected student is not allowed to borrow equipment.
+
+![alt text](image-4.png)
+
+#### Build and Git History
+
+This screenshot shows a successful `dotnet build` and meaningful Git commits.
+
+![alt text](image-5.png)
+
+### Reflection
+
+**Why use a ViewModel?**
+
+A ViewModel keeps the screen code separate from the user interface. This makes the project easier to read and change.
+
+**Why call an application service from the ViewModel?**
+
+The application service contains the borrowing and return rules. Both the console application and the desktop application can use the same rules.
+
+**Why use singleton repositories?**
+
+Singleton repositories keep one shared list of data while the desktop application is open. This lets borrowed and returned items appear correctly on both screens.
