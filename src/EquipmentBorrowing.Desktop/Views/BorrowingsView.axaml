@@ -9,8 +9,7 @@
           RowSpacing="12">
         <TextBlock Grid.Row="0"
                    Text="Active Borrowings"
-                   FontSize="20"
-                   FontWeight="SemiBold" />
+                   Classes="section-heading" />
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
@@ -19,7 +18,8 @@
                     Command="{Binding LoadCommand}" />
 
             <Button Content="Return Equipment"
-                    Command="{Binding ReturnEquipmentCommand}" />
+                    Command="{Binding ReturnEquipmentCommand}"
+                    Classes="primary" />
         </StackPanel>
 
         <ListBox Grid.Row="2"
@@ -27,11 +27,8 @@
                  SelectedItem="{Binding SelectedBorrowing, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="domain:Borrowing">
-                    <Border Padding="12"
-                            Margin="0,4"
-                            Background="#F7F9FC"
-                            CornerRadius="6">
-                        <Grid ColumnDefinitions="80,*,*,160">
+                    <Border Classes="list-item">
+                        <Grid ColumnDefinitions="75,*,*,160,95">
                             <TextBlock Grid.Column="0"
                                        Text="{Binding Id}"
                                        FontWeight="SemiBold" />
@@ -55,6 +52,10 @@
                                 <TextBlock Text="Expected return"
                                            FontSize="12" />
                             </StackPanel>
+
+                            <TextBlock Grid.Column="4"
+                                       Text="{Binding Status}"
+                                       HorizontalAlignment="Center" />
                         </Grid>
                     </Border>
                 </DataTemplate>
@@ -63,6 +64,6 @@
 
         <TextBlock Grid.Row="3"
                    Text="{Binding StatusMessage}"
-                   TextWrapping="Wrap" />
+                   Classes="status-message" />
     </Grid>
 </UserControl>

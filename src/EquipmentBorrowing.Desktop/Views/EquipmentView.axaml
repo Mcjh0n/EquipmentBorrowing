@@ -5,46 +5,88 @@
              x:Class="EquipmentBorrowing.Desktop.Views.EquipmentView"
              x:DataType="vm:EquipmentViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto"
-          RowSpacing="12">
-        <TextBlock Grid.Row="0"
-                   Text="Available Equipment"
-                   FontSize="20"
-                   FontWeight="SemiBold" />
+    <Grid ColumnDefinitions="320,*"
+          ColumnSpacing="24">
+        <Border Grid.Column="0"
+                Classes="card">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Borrow Equipment"
+                           Classes="section-heading" />
 
-        <Button Grid.Row="1"
-                Content="Refresh Equipment"
-                Command="{Binding LoadCommand}"
-                HorizontalAlignment="Left" />
+                <TextBlock Text="Student"
+                           Classes="field-label" />
 
-        <ListBox Grid.Row="2"
-                 ItemsSource="{Binding AvailableEquipment}"
-                 SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate x:DataType="domain:Equipment">
-                    <Border Padding="12"
-                            Margin="0,4"
-                            Background="#F7F9FC"
-                            CornerRadius="6">
-                        <Grid ColumnDefinitions="70,*,120">
-                            <TextBlock Grid.Column="0"
-                                       Text="{Binding Id}"
-                                       FontWeight="SemiBold" />
+                <ComboBox ItemsSource="{Binding Students}"
+                          SelectedItem="{Binding SelectedStudent, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="domain:Student">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding Name}" />
+                <TextBlock Text="Equipment"
+                           Classes="field-label" />
 
-                            <TextBlock Grid.Column="2"
-                                       Text="{Binding IsAvailable}"
-                                       HorizontalAlignment="Center" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                <ComboBox ItemsSource="{Binding AvailableEquipment}"
+                          SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="domain:Equipment">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-        <TextBlock Grid.Row="3"
-                   Text="{Binding StatusMessage}"
-                   TextWrapping="Wrap" />
+                <TextBlock Text="Expected Return Date"
+                           Classes="field-label" />
+
+                <DatePicker SelectedDate="{Binding ExpectedReturnDate, Mode=TwoWay}" />
+
+                <Button Content="Borrow Equipment"
+                        Command="{Binding BorrowCommand}"
+                        Classes="primary"
+                        Margin="0,8,0,0" />
+
+                <TextBlock Text="{Binding StatusMessage}"
+                           Classes="status-message"
+                           Margin="0,8,0,0" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1"
+              RowDefinitions="Auto,Auto,*"
+              RowSpacing="12">
+            <TextBlock Grid.Row="0"
+                       Text="Available Equipment"
+                       Classes="section-heading" />
+
+            <Button Grid.Row="1"
+                    Content="Refresh Equipment"
+                    Command="{Binding LoadCommand}"
+                    HorizontalAlignment="Left" />
+
+            <ListBox Grid.Row="2"
+                     ItemsSource="{Binding AvailableEquipment}"
+                     SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="domain:Equipment">
+                        <Border Classes="list-item">
+                            <Grid ColumnDefinitions="70,*,120">
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Id}"
+                                           FontWeight="SemiBold" />
+
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Name}" />
+
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding IsAvailable}"
+                                           HorizontalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>
