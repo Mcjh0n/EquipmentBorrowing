@@ -20,8 +20,8 @@ public class InMemoryBorrowingRepository : IBorrowingRepository
         CancellationToken cancellationToken = default)
     {
         int count = _borrowings.Count(
-            b => b.Student.Id == studentId &&
-                 b.Status == BorrowingStatus.Active);
+            borrowing => borrowing.Student.Id == studentId &&
+                         borrowing.Status == BorrowingStatus.Active);
 
         return Task.FromResult(count);
     }
@@ -32,10 +32,29 @@ public class InMemoryBorrowingRepository : IBorrowingRepository
         CancellationToken cancellationToken = default)
     {
         Borrowing? borrowing = _borrowings.FirstOrDefault(
-            b => b.Student.Id == studentId &&
-                 b.Equipment.Id == equipmentId &&
-                 b.Status == BorrowingStatus.Active);
+            borrowing => borrowing.Student.Id == studentId &&
+                         borrowing.Equipment.Id == equipmentId &&
+                         borrowing.Status == BorrowingStatus.Active);
 
         return Task.FromResult(borrowing);
+    }
+
+    public Task<Borrowing?> GetByIdAsync(
+        int borrowingId,
+        CancellationToken cancellationToken = default)
+    {
+        Borrowing? borrowing = _borrowings.FirstOrDefault(
+            borrowing => borrowing.Id == borrowingId);
+
+        return Task.FromResult(borrowing);
+    }
+
+    public Task<IEnumerable<Borrowing>> GetActiveAsync(
+        CancellationToken cancellationToken = default)
+    {
+        IEnumerable<Borrowing> activeBorrowings = _borrowings.Where(
+            borrowing => borrowing.Status == BorrowingStatus.Active);
+
+        return Task.FromResult(activeBorrowings);
     }
 }

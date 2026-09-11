@@ -16,4 +16,11 @@ public interface IBorrowingRepository
         int studentId,
         int equipmentId,
         CancellationToken cancellationToken = default);
+
+    Task<Borrowing?> GetByIdAsync(
+        int borrowingId,
+        CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Borrowing>> GetActiveAsync(
+        CancellationToken cancellationToken = default);
 }

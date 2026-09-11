@@ -19,4 +19,10 @@ public class InMemoryStudentRepository : IStudentRepository
         Student? student = _students.FirstOrDefault(s => s.Id == studentId);
         return Task.FromResult(student);
     }
+
+    public Task<IEnumerable<Student>> GetAllAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult<IEnumerable<Student>>(_students);
+    }
 }
