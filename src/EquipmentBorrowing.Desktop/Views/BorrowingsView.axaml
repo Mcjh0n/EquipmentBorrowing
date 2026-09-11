@@ -1,15 +1,68 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:EquipmentBorrowing.Desktop.ViewModels"
+             xmlns:domain="using:EquipmentBorrowing.Domain"
              x:Class="EquipmentBorrowing.Desktop.Views.BorrowingsView"
              x:DataType="vm:BorrowingsViewModel">
 
-    <StackPanel Spacing="12">
-        <TextBlock Text="Active Borrowings"
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          RowSpacing="12">
+        <TextBlock Grid.Row="0"
+                   Text="Active Borrowings"
                    FontSize="20"
                    FontWeight="SemiBold" />
 
-        <TextBlock Text="The active-borrowings list and Return Equipment button will be added in a later part."
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Spacing="10">
+            <Button Content="Refresh"
+                    Command="{Binding LoadCommand}" />
+
+            <Button Content="Return Equipment"
+                    Command="{Binding ReturnEquipmentCommand}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="2"
+                 ItemsSource="{Binding ActiveBorrowings}"
+                 SelectedItem="{Binding SelectedBorrowing, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="domain:Borrowing">
+                    <Border Padding="12"
+                            Margin="0,4"
+                            Background="#F7F9FC"
+                            CornerRadius="6">
+                        <Grid ColumnDefinitions="80,*,*,160">
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding Id}"
+                                       FontWeight="SemiBold" />
+
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Student.Name}"
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="Student"
+                                           FontSize="12" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{Binding Equipment.Name}"
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="Equipment"
+                                           FontSize="12" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3">
+                                <TextBlock Text="{Binding ExpectedReturnDate}" />
+                                <TextBlock Text="Expected return"
+                                           FontSize="12" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock Grid.Row="3"
+                   Text="{Binding StatusMessage}"
                    TextWrapping="Wrap" />
-    </StackPanel>
+    </Grid>
 </UserControl>
