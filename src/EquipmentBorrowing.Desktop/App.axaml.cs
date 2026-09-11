@@ -32,6 +32,8 @@ public partial class App : Avalonia.Application
         services.AddTransient<BorrowingLookupService>();
 
         services.AddTransient<MainViewModel>();
+        services.AddTransient<EquipmentViewModel>();
+        services.AddTransient<BorrowingsViewModel>();
 
         _serviceProvider = services.BuildServiceProvider();
 

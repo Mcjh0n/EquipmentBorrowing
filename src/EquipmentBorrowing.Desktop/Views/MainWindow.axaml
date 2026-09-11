@@ -1,7 +1,6 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:EquipmentBorrowing.Desktop.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         x:Class="EquipmentBorrowing.Desktop.Views.MainWindow"
@@ -11,10 +10,6 @@
         Height="650"
         MinWidth="800"
         MinHeight="500">
-
-    <Design.DataContext>
-        <vm:MainViewModel />
-    </Design.DataContext>
 
     <Grid RowDefinitions="Auto,*">
         <Border Grid.Row="0"
@@ -29,7 +24,7 @@
         <Grid Grid.Row="1"
               ColumnDefinitions="220,*">
             <Border Grid.Column="0"
-                    Background="#89b2f0"
+                    Background="#4b5d79"
                     Padding="16">
                 <StackPanel Spacing="10">
                     <TextBlock Text="Navigation"
@@ -49,22 +44,21 @@
 
             <Border Grid.Column="1"
                     Padding="28">
-                <StackPanel Spacing="16">
-                    <TextBlock Text="{Binding CurrentSection}"
+                <Grid RowDefinitions="Auto,Auto,*"
+                      RowSpacing="16">
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding CurrentSection}"
                                FontSize="26"
                                FontWeight="SemiBold" />
 
-                    <TextBlock Text="{Binding CurrentSectionDescription}"
+                    <TextBlock Grid.Row="1"
+                               Text="{Binding CurrentSectionDescription}"
                                FontSize="15"
                                TextWrapping="Wrap" />
 
-                    <Border Background="#3e87f3"
-                            CornerRadius="6"
-                            Padding="20">
-                        <TextBlock Text="The selected screen will appear here in the next parts of the activity."
-                                   TextWrapping="Wrap" />
-                    </Border>
-                </StackPanel>
+                    <ContentControl Grid.Row="2"
+                                    Content="{Binding CurrentView}" />
+                </Grid>
             </Border>
         </Grid>
     </Grid>
