@@ -173,37 +173,37 @@ dotnet run --project src/EquipmentBorrowing.Desktop
 ```
 
 ### Screenshots
-![alt text](image.png)
+
 
 #### Equipment Page
 
 The Equipment page shows available equipment and the borrow form.
 
-![alt text](image-1.png)
+![Equipment page](docs/screenshots/equipment-page.png)
 
 #### Active Borrowings After Borrowing
 
 This page shows the active borrowing records after equipment was borrowed.
 
-![alt text](image-2.png)
+![Active borrowings](docs/screenshots/active-borrowings.png)
 
 #### Successful Return
 
 This message shows that the Oscilloscope was returned successfully.
 
-![alt text](image-3.png)
+![Successful return](docs/screenshots/return-success.png)
 
 #### Handled Validation Error
 
 This message shows a rule check. The selected student is not allowed to borrow equipment.
 
-![alt text](image-4.png)
+![Validation message](docs/screenshots/validation-message.png)
 
 #### Build and Git History
 
 This screenshot shows a successful `dotnet build` and meaningful Git commits.
 
-![alt text](image-5.png)
+![Build and Git history](docs/screenshots/build-and-git-history.png)
 
 ### Reflection
 
