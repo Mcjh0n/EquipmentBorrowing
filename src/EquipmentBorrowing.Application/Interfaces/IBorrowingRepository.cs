@@ -8,6 +8,10 @@ public interface IBorrowingRepository
         Borrowing borrowing,
         CancellationToken cancellationToken = default);
 
+    Task UpdateAsync(
+        Borrowing borrowing,
+        CancellationToken cancellationToken = default);
+
     Task<int> CountActiveByStudentAsync(
         int studentId,
         CancellationToken cancellationToken = default);

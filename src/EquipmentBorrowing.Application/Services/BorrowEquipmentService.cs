@@ -62,7 +62,6 @@ public class BorrowEquipmentService
 
         var borrowing = new Borrowing
         {
-            Id = Random.Shared.Next(1000, 9999),
             Student = student,
             Equipment = equipment,
             DateBorrowed = DateTime.Now,

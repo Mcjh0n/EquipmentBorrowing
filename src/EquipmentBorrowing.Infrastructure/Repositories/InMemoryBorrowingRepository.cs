@@ -6,12 +6,23 @@ namespace EquipmentBorrowing.Infrastructure.Repositories;
 public class InMemoryBorrowingRepository : IBorrowingRepository
 {
     private readonly List<Borrowing> _borrowings = new();
+    private int _nextId = 1;
 
     public Task AddAsync(
         Borrowing borrowing,
         CancellationToken cancellationToken = default)
     {
+        if (borrowing.Id == 0)
+            borrowing.Id = _nextId++;
+
         _borrowings.Add(borrowing);
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateAsync(
+        Borrowing borrowing,
+        CancellationToken cancellationToken = default)
+    {
         return Task.CompletedTask;
     }
 

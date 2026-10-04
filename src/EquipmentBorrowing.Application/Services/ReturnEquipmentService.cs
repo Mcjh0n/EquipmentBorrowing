@@ -33,6 +33,8 @@ public sealed class ReturnEquipmentService
         borrowing.MarkAsReturned();
         borrowing.Equipment.MarkAsAvailable();
 
+        await _borrowingRepository.UpdateAsync(borrowing, cancellationToken);
+
         return BorrowingResult.Success(
             $"'{borrowing.Equipment.Name}' was returned successfully.");
     }
