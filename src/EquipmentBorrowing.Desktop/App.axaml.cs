@@ -5,7 +5,9 @@ using EquipmentBorrowing.Application.Interfaces;
 using EquipmentBorrowing.Application.Services;
 using EquipmentBorrowing.Desktop.ViewModels;
 using EquipmentBorrowing.Desktop.Views;
+using EquipmentBorrowing.Infrastructure.Persistence;
 using EquipmentBorrowing.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EquipmentBorrowing.Desktop;
@@ -23,9 +25,14 @@ public partial class App : Avalonia.Application
     {
         var services = new ServiceCollection();
 
-        services.AddSingleton<IStudentRepository, InMemoryStudentRepository>();
-        services.AddSingleton<IEquipmentRepository, InMemoryEquipmentRepository>();
-        services.AddSingleton<IBorrowingRepository, InMemoryBorrowingRepository>();
+        services.AddDbContextFactory<EquipmentBorrowingDbContext>(options =>
+            options
+                .UseSqlite(EquipmentBorrowingDatabase.GetConnectionString())
+                .LogTo(message => System.Diagnostics.Trace.WriteLine(message)));
+
+        services.AddTransient<IStudentRepository, EfStudentRepository>();
+        services.AddTransient<IEquipmentRepository, EfEquipmentRepository>();
+        services.AddTransient<IBorrowingRepository, EfBorrowingRepository>();
 
         services.AddTransient<BorrowEquipmentService>();
         services.AddTransient<ReturnEquipmentService>();
@@ -37,12 +44,21 @@ public partial class App : Avalonia.Application
 
         _serviceProvider = services.BuildServiceProvider();
 
+        using (var dbContext = _serviceProvider
+                   .GetRequiredService<IDbContextFactory<EquipmentBorrowingDbContext>>()
+                   .CreateDbContext())
+        {
+            DatabaseInitializer.InitializeAsync(dbContext).GetAwaiter().GetResult();
+        }
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
                 DataContext = _serviceProvider.GetRequiredService<MainViewModel>()
             };
+
+            desktop.Exit += (_, _) => _serviceProvider.Dispose();
         }
 
         base.OnFrameworkInitializationCompleted();
