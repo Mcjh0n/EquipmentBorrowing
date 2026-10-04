@@ -220,7 +220,7 @@ In the original Activity 2 implementation, singleton repositories shared one in-
 
 The database has three tables: `Students`, `Equipment`, and `Borrowings`. Each table has an integer primary key. `Borrowings.StudentId` and `Borrowings.EquipmentId` are required foreign keys. A student and an equipment item can each have multiple borrowing records over time. The foreign keys use restricted deletes so a referenced student or item cannot be deleted while borrowing history refers to it. Borrowing status is stored as an integer (`Active = 0`, `Returned = 1`).
 
-The diagram is in [docs/database-design.drawio](docs/database-design.drawio). SQL examples are in [docs/database-queries.sql](docs/database-queries.sql).
+The diagram is in [docs/database-diagram.png](docs/database-diagram.png). SQL examples are in [docs/database-queries.sql](docs/database-queries.sql).
 
 ### SQLite, DbContext, and repositories
 
@@ -280,3 +280,49 @@ Local verification results are recorded in [docs/persistence-verification.md](do
 5. **Why are foreign keys important?** They ensure each borrowing refers to real student and equipment records and prevent invalid references.
 6. **Why use `AsNoTracking()` for display queries?** It avoids change-tracking work for entities that the operation only reads.
 7. **What if SQLite were replaced?** The Infrastructure configuration and repository implementations would change; the Domain, application services, and ViewModels could continue using the same interfaces and workflows.
+
+### Activity 3 Screenshots
+
+#### Build
+
+![Successful Activity 3 build](docs/screenshots/build-activity3.png)
+
+#### Git history
+
+![Activity 3 Git history](docs/screenshots/git-history-activity3.png)
+
+#### Database tables
+
+![SQLite database tables](docs/screenshots/database-tables.png)
+
+#### Students table data
+
+![Stored student records](docs/screenshots/database-students.png)
+
+#### Equipment table data
+
+![Stored equipment records](docs/screenshots/database-equipment.png)
+
+#### Borrowings table data
+
+![Stored borrowing records](docs/screenshots/database-borrowings.png)
+
+#### Borrowing with student and equipment names
+
+![Borrowing query results with student and equipment names](docs/screenshots/borrowing-with-names.png)
+
+#### Successful borrowing
+
+![Successful borrowing in the Avalonia app](docs/screenshots/borrow-success-activity3.png)
+
+#### Borrowing before restart
+
+![Active borrowing before restarting the app](docs/screenshots/borrowing-before-restart.png)
+
+#### Borrowing after restart
+
+![The same active borrowing after restarting the app](docs/screenshots/borrowing-after-restart.png)
+
+#### Successful return
+
+![Successful equipment return in the Avalonia app](docs/screenshots/return-success-activity3.png)
