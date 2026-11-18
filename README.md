@@ -328,6 +328,7 @@ Student and equipment records have stable integer IDs, normalized identity keys,
 The required catalog and use-case diagram are in [docs/activity4-use-case-catalog.md](docs/activity4-use-case-catalog.md). The supplied fourteen-case suite is preserved in [docs/activity4-use-case-suite.docx](docs/activity4-use-case-suite.docx). Business rules are summarized in [docs/activity4-business-rules.md](docs/activity4-business-rules.md), and the scenario-by-scenario acceptance/evidence matrix is [docs/activity4-traceability.md](docs/activity4-traceability.md). Record the observed result and evidence path for each scenario you execute. Use a disposable database for deliberate constraint and failure demonstrations.
 
 PostgreSQL examples for the Activity 4 schema are in [docs/activity4-database-queries.sql](docs/activity4-database-queries.sql).
+The complete PostgreSQL schema script generated from both EF Core migrations is in [docs/activity4-postgresql-schema.sql](docs/activity4-postgresql-schema.sql). It can be used to review the tables, constraints, indexes, and migration history entries without connecting to a server.
 
 The Activity 3 screenshots remain historical evidence only. Capture new Activity 4 PostgreSQL screenshots and readbacks after configuring a PostgreSQL server; SQLite screenshots do not establish PostgreSQL behavior.
 
