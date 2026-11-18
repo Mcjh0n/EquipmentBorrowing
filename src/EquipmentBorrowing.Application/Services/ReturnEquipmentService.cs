@@ -30,7 +30,7 @@ public sealed class ReturnEquipmentService
             return BorrowingResult.Failure("This equipment has already been returned.");
         }
 
-        borrowing.MarkAsReturned();
+        borrowing.MarkAsReturned(DateOnly.FromDateTime(DateTime.Today));
         borrowing.Equipment.MarkAsAvailable();
 
         await _borrowingRepository.UpdateAsync(borrowing, cancellationToken);

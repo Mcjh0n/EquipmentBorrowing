@@ -27,6 +27,9 @@ public class BorrowEquipmentService
         DateTime expectedReturnDate,
         CancellationToken cancellationToken = default)
     {
+        if (expectedReturnDate.Date <= DateTime.Today)
+            return BorrowingResult.Failure("Expected return date must be later than today.");
+
         // 1. Does the student exist?
         Student? student = await _studentRepository.GetByIdAsync(
             studentId, cancellationToken);
@@ -64,8 +67,8 @@ public class BorrowEquipmentService
         {
             Student = student,
             Equipment = equipment,
-            DateBorrowed = DateTime.Now,
-            ExpectedReturnDate = expectedReturnDate,
+            DateBorrowed = DateOnly.FromDateTime(DateTime.Today),
+            ExpectedReturnDate = DateOnly.FromDateTime(expectedReturnDate.Date),
         };
 
         await _borrowingRepository.AddAsync(borrowing, cancellationToken);

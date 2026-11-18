@@ -11,4 +11,8 @@ public interface IStudentRepository
 
     Task<IEnumerable<Student>> GetAllAsync(
         CancellationToken cancellationToken = default);
+
+    Task<Student> AddAsync(Student student, CancellationToken cancellationToken = default);
+    Task UpdateAsync(Student student, CancellationToken cancellationToken = default);
+    Task<bool> IsStudentNumberInUseAsync(string normalizedNumber, int? exceptId = null, CancellationToken cancellationToken = default);
 }

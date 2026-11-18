@@ -27,4 +27,9 @@ public interface IBorrowingRepository
 
     Task<IEnumerable<Borrowing>> GetActiveAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<Borrowing>> CheckoutManyAsync(int studentId, IReadOnlyList<int> equipmentIds, DateOnly expectedReturnDate, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Borrowing>> GetStudentHistoryAsync(int studentId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Borrowing>> GetEquipmentHistoryAsync(int equipmentId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Borrowing>> SearchAsync(string? search, BorrowingStatus? status, string sortField, bool descending, CancellationToken cancellationToken = default);
 }

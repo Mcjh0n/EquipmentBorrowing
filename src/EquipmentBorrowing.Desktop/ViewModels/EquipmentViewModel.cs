@@ -1,11 +1,12 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EquipmentBorrowing.Application.Services;
 using EquipmentBorrowing.Domain;
+using EquipmentBorrowing.Application.Services;
 
 namespace EquipmentBorrowing.Desktop.ViewModels;
 
@@ -13,10 +14,13 @@ public partial class EquipmentViewModel : ViewModelBase
 {
     private readonly BorrowingLookupService _borrowingLookupService;
     private readonly BorrowEquipmentService _borrowEquipmentService;
+    private readonly MultiItemCheckoutService _multiItemCheckoutService;
 
     public ObservableCollection<Student> Students { get; } = new();
 
     public ObservableCollection<Equipment> AvailableEquipment { get; } = new();
+    public ObservableCollection<Equipment> EquipmentCatalog { get; } = new();
+    public ObservableCollection<EquipmentChoice> EquipmentChoices { get; } = new();
 
     [ObservableProperty]
     private Student? selectedStudent;
@@ -32,10 +36,12 @@ public partial class EquipmentViewModel : ViewModelBase
 
     public EquipmentViewModel(
         BorrowingLookupService borrowingLookupService,
-        BorrowEquipmentService borrowEquipmentService)
+        BorrowEquipmentService borrowEquipmentService,
+        MultiItemCheckoutService multiItemCheckoutService)
     {
         _borrowingLookupService = borrowingLookupService;
         _borrowEquipmentService = borrowEquipmentService;
+        _multiItemCheckoutService = multiItemCheckoutService;
     }
 
     [RelayCommand]
@@ -43,6 +49,8 @@ public partial class EquipmentViewModel : ViewModelBase
     {
         Students.Clear();
         AvailableEquipment.Clear();
+        EquipmentCatalog.Clear();
+        EquipmentChoices.Clear();
 
         IEnumerable<Student> students =
             await _borrowingLookupService.GetStudentsAsync();
@@ -58,11 +66,30 @@ public partial class EquipmentViewModel : ViewModelBase
         foreach (Equipment item in equipment)
         {
             AvailableEquipment.Add(item);
+            EquipmentChoices.Add(new EquipmentChoice(item));
         }
 
-        StatusMessage = AvailableEquipment.Count == 0
+        foreach (var item in await _borrowingLookupService.GetEquipmentAsync()) EquipmentCatalog.Add(item);
+
+        StatusMessage = EquipmentCatalog.Count == 0
             ? "No equipment is currently available."
-            : $"{AvailableEquipment.Count} item(s) available.";
+            : $"Catalog: {EquipmentCatalog.Count} item(s); {AvailableEquipment.Count} currently available.";
+    }
+
+    [RelayCommand]
+    private async Task BorrowSelectedItemsAsync()
+    {
+        if (SelectedStudent is null) { StatusMessage = "Select a student before checkout."; return; }
+        if (ExpectedReturnDate is null) { StatusMessage = "Select an expected return date."; return; }
+        var ids = EquipmentChoices.Where(x => x.IsSelected).Select(x => x.Item.Id).ToArray();
+        try
+        {
+            var result = await _multiItemCheckoutService.ExecuteAsync(
+                SelectedStudent.Id, ids, DateOnly.FromDateTime(ExpectedReturnDate.Value.Date));
+            StatusMessage = $"Checked out {result.Count} items atomically for {SelectedStudent.Name}.";
+            await LoadAsync();
+        }
+        catch (Exception ex) { StatusMessage = UserFacingError.From(ex); }
     }
 
     [RelayCommand]
@@ -94,10 +121,15 @@ public partial class EquipmentViewModel : ViewModelBase
             return;
         }
 
-        var result = await _borrowEquipmentService.ExecuteAsync(
-            SelectedStudent.Id,
-            SelectedEquipment.Id,
-            returnDate);
+        EquipmentBorrowing.Application.BorrowingResult result;
+        try
+        {
+            result = await _borrowEquipmentService.ExecuteAsync(
+                SelectedStudent.Id,
+                SelectedEquipment.Id,
+                returnDate);
+        }
+        catch (Exception ex) { StatusMessage = UserFacingError.From(ex); return; }
 
         StatusMessage = result.Message;
 
@@ -110,4 +142,11 @@ public partial class EquipmentViewModel : ViewModelBase
             StatusMessage = result.Message;
         }
     }
+}
+
+public sealed class EquipmentChoice(Equipment item) : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
+{
+    public Equipment Item { get; } = item;
+    private bool _isSelected;
+    public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value); }
 }

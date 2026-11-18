@@ -68,4 +68,9 @@ public class InMemoryBorrowingRepository : IBorrowingRepository
 
         return Task.FromResult(activeBorrowings);
     }
+
+    public Task<IReadOnlyList<Borrowing>> CheckoutManyAsync(int studentId, IReadOnlyList<int> equipmentIds, DateOnly expectedReturnDate, CancellationToken cancellationToken = default) => throw new NotSupportedException("Multi-item checkout requires PostgreSQL transactions.");
+    public Task<IEnumerable<Borrowing>> GetStudentHistoryAsync(int studentId, CancellationToken cancellationToken = default) => Task.FromResult<IEnumerable<Borrowing>>(_borrowings.Where(b => b.Student.Id == studentId));
+    public Task<IEnumerable<Borrowing>> GetEquipmentHistoryAsync(int equipmentId, CancellationToken cancellationToken = default) => Task.FromResult<IEnumerable<Borrowing>>(_borrowings.Where(b => b.Equipment.Id == equipmentId));
+    public Task<IEnumerable<Borrowing>> SearchAsync(string? search, BorrowingStatus? status, string sortField, bool descending, CancellationToken cancellationToken = default) => Task.FromResult<IEnumerable<Borrowing>>(_borrowings.Where(b => !status.HasValue || b.Status == status.Value));
 }

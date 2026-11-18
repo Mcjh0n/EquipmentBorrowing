@@ -7,9 +7,9 @@ public class InMemoryStudentRepository : IStudentRepository
 {
     private readonly List<Student> _students = new()
     {
-        new Student(1, "Alice Reyes", IsAllowedToBorrow: true),
-        new Student(2, "Bob Santos", IsAllowedToBorrow: true),
-        new Student(3, "Carlos Mendoza", IsAllowedToBorrow: false)
+        new Student(1, "S-001", "Alice Reyes"),
+        new Student(2, "S-002", "Bob Santos"),
+        new Student(3, "S-003", "Carlos Mendoza", isAllowedToBorrow: false)
     };
 
     public Task<Student?> GetByIdAsync(
@@ -25,4 +25,8 @@ public class InMemoryStudentRepository : IStudentRepository
     {
         return Task.FromResult<IEnumerable<Student>>(_students);
     }
+
+    public Task<Student> AddAsync(Student student, CancellationToken cancellationToken = default) => throw new NotSupportedException("Activity 4 management uses PostgreSQL repositories.");
+    public Task UpdateAsync(Student student, CancellationToken cancellationToken = default) => throw new NotSupportedException("Activity 4 management uses PostgreSQL repositories.");
+    public Task<bool> IsStudentNumberInUseAsync(string normalizedNumber, int? exceptId = null, CancellationToken cancellationToken = default) => Task.FromResult(_students.Any(s => s.StudentNumberNormalized == normalizedNumber && s.Id != exceptId));
 }
