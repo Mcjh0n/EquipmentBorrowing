@@ -47,6 +47,18 @@
                         Classes="primary"
                         Margin="0,8,0,0" />
 
+                <TextBlock Text="Select 2 or more items for atomic multi-item checkout" TextWrapping="Wrap" />
+                <ItemsControl ItemsSource="{Binding EquipmentChoices}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Item.Name}" IsChecked="{Binding IsSelected}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Content="Check Out Selected Items"
+                        Command="{Binding BorrowSelectedItemsCommand}"
+                        Classes="primary" />
+
                 <TextBlock Text="{Binding StatusMessage}"
                            Classes="status-message"
                            Margin="0,8,0,0" />
@@ -57,7 +69,7 @@
               RowDefinitions="Auto,Auto,*"
               RowSpacing="12">
             <TextBlock Grid.Row="0"
-                       Text="Available Equipment"
+                       Text="Equipment Catalog"
                        Classes="section-heading" />
 
             <Button Grid.Row="1"
@@ -66,22 +78,18 @@
                     HorizontalAlignment="Left" />
 
             <ListBox Grid.Row="2"
-                     ItemsSource="{Binding AvailableEquipment}"
+                     ItemsSource="{Binding EquipmentCatalog}"
                      SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate x:DataType="domain:Equipment">
                         <Border Classes="list-item">
-                            <Grid ColumnDefinitions="70,*,120">
-                                <TextBlock Grid.Column="0"
-                                           Text="{Binding Id}"
-                                           FontWeight="SemiBold" />
-
-                                <TextBlock Grid.Column="1"
-                                           Text="{Binding Name}" />
-
-                                <TextBlock Grid.Column="2"
-                                           Text="{Binding IsAvailable}"
-                                           HorizontalAlignment="Center" />
+                            <Grid ColumnDefinitions="100,* ,100">
+                                <TextBlock Grid.Column="0" Text="{Binding EquipmentIdentifier}" FontWeight="SemiBold" />
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Description}" FontSize="12" />
+                                </StackPanel>
+                                <TextBlock Grid.Column="2" Text="{Binding IsAvailable}" HorizontalAlignment="Center" />
                             </Grid>
                         </Border>
                     </DataTemplate>

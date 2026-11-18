@@ -11,15 +11,23 @@
                    Text="Active Borrowings"
                    Classes="section-heading" />
 
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    Spacing="10">
-            <Button Content="Refresh"
-                    Command="{Binding LoadCommand}" />
-
-            <Button Content="Return Equipment"
-                    Command="{Binding ReturnEquipmentCommand}"
-                    Classes="primary" />
+        <StackPanel Grid.Row="1" Spacing="8">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox Width="230" PlaceholderText="Search student number/name or equipment" Text="{Binding SearchText}" />
+                <ComboBox Width="100" ItemsSource="{Binding StatusOptions}" SelectedItem="{Binding StatusFilter}" />
+                <ComboBox Width="150" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SortField}" />
+                <CheckBox Content="Descending" IsChecked="{Binding SortDescending}" />
+                <Button Content="Search" Command="{Binding SearchCommand}" Classes="primary" />
+                <Button Content="Clear search" Command="{Binding ClearSearchCommand}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ComboBox Width="180" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudentForHistory}" PlaceholderText="Student history" />
+                <Button Content="Student history" Command="{Binding ShowStudentHistoryCommand}" />
+                <ComboBox Width="180" ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipmentForHistory}" PlaceholderText="Equipment history" />
+                <Button Content="Equipment history" Command="{Binding ShowEquipmentHistoryCommand}" />
+                <Button Content="Refresh" Command="{Binding LoadCommand}" />
+                <Button Content="Return selected" Command="{Binding ReturnEquipmentCommand}" Classes="primary" />
+            </StackPanel>
         </StackPanel>
 
         <ListBox Grid.Row="2"

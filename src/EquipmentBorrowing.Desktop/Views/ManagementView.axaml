@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vm="using:EquipmentBorrowing.Desktop.ViewModels" xmlns:domain="using:EquipmentBorrowing.Domain" x:Class="EquipmentBorrowing.Desktop.Views.ManagementView" x:DataType="vm:ManagementViewModel">
+  <Grid RowDefinitions="Auto,*,Auto" RowSpacing="10">
+    <Button Grid.Row="0" Content="Refresh records" Command="{Binding LoadCommand}" HorizontalAlignment="Left"/>
+    <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="16">
+      <Grid Grid.Column="0" RowDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6">
+        <TextBlock Text="Students" FontSize="20" FontWeight="Bold"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent}">
+          <ListBox.ItemTemplate><DataTemplate x:DataType="domain:Student"><TextBlock Text="{Binding Name}"/></DataTemplate></ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox Grid.Row="2" PlaceholderText="Student number" Text="{Binding StudentNumber}"/>
+        <TextBox Grid.Row="3" PlaceholderText="Full name" Text="{Binding StudentName}"/>
+        <TextBox Grid.Row="4" PlaceholderText="Contact (optional)" Text="{Binding StudentContact}"/>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Spacing="8">
+          <Button Content="Save student" Command="{Binding SaveStudentCommand}"/>
+          <Button Content="Clear" Command="{Binding ClearStudentCommand}"/>
+          <Button Content="Permit borrowing" Command="{Binding PermitStudentCommand}"/>
+          <Button Content="Restrict new borrowing" Command="{Binding RestrictStudentCommand}"/>
+        </StackPanel>
+      </Grid>
+      <Grid Grid.Column="1" RowDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="6">
+        <TextBlock Text="Equipment" FontSize="20" FontWeight="Bold"/>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Equipment}" SelectedItem="{Binding SelectedEquipment}">
+          <ListBox.ItemTemplate><DataTemplate x:DataType="domain:Equipment"><TextBlock Text="{Binding Name}"/></DataTemplate></ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox Grid.Row="2" PlaceholderText="Physical item identifier" Text="{Binding EquipmentIdentifier}"/>
+        <TextBox Grid.Row="3" PlaceholderText="Equipment name" Text="{Binding EquipmentName}"/>
+        <TextBox Grid.Row="4" PlaceholderText="Description (optional)" Text="{Binding EquipmentDescription}"/>
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Spacing="8">
+          <Button Content="Save equipment" Command="{Binding SaveEquipmentCommand}"/>
+          <Button Content="Clear" Command="{Binding ClearEquipmentCommand}"/>
+        </StackPanel>
+      </Grid>
+    </Grid>
+    <TextBlock Grid.Row="2" Text="{Binding StatusMessage}" TextWrapping="Wrap"/>
+  </Grid>
+</UserControl>

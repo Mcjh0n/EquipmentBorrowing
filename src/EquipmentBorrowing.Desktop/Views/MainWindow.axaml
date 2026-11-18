@@ -39,12 +39,16 @@
                     <Button Content="Active Borrowings"
                             Command="{Binding ShowBorrowingsCommand}"
                             HorizontalAlignment="Stretch" />
+
+                    <Button Content="Manage Records"
+                            Command="{Binding ShowManagementCommand}"
+                            HorizontalAlignment="Stretch" />
                 </StackPanel>
             </Border>
 
             <Border Grid.Column="1"
                     Padding="28">
-                <Grid RowDefinitions="Auto,Auto,*"
+                <Grid RowDefinitions="Auto,Auto,Auto,*"
                       RowSpacing="16">
                     <TextBlock Grid.Row="0"
                                Text="{Binding CurrentSection}"
@@ -56,7 +60,12 @@
                                FontSize="15"
                                TextWrapping="Wrap" />
 
-                    <ContentControl Grid.Row="2"
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsDatabaseUnavailable}">
+                        <TextBlock Text="{Binding StartupMessage}" TextWrapping="Wrap" />
+                        <Button Content="Retry Database" Command="{Binding RetryDatabaseCommand}" />
+                    </StackPanel>
+
+                    <ContentControl Grid.Row="3"
                                     Content="{Binding CurrentView}" />
                 </Grid>
             </Border>
