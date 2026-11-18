@@ -22,17 +22,23 @@ public sealed class EfBorrowingRepository(
         CancellationToken cancellationToken = default)
     {
         await using var dbContext = await contextFactory.CreateDbContextAsync(cancellationToken);
-
-        dbContext.Borrowings.Attach(borrowing);
-        dbContext.Entry(borrowing)
-            .Property(item => item.Status)
-            .IsModified = true;
-        dbContext.Entry(borrowing).Property(item => item.ReturnedDate).IsModified = true;
-        dbContext.Entry(borrowing.Equipment)
-            .Property(item => item.IsAvailable)
-            .IsModified = true;
-
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await using var tx = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+        var changed = await dbContext.Borrowings
+            .Where(item => item.Id == borrowing.Id && item.Status == BorrowingStatus.Active)
+            .ExecuteUpdateAsync(setters => setters
+                .SetProperty(item => item.Status, BorrowingStatus.Returned)
+                .SetProperty(item => item.ReturnedDate, borrowing.ReturnedDate), cancellationToken);
+        if (changed != 1)
+            throw new InvalidOperationException("This borrowing is no longer active. Refresh the list before trying again.");
+        var updatedEquipment = await dbContext.Equipment
+            .Where(item => item.Id == borrowing.Equipment.Id)
+            .ExecuteUpdateAsync(setters => setters.SetProperty(item => item.IsAvailable, true), cancellationToken);
+        if (updatedEquipment != 1) throw new InvalidOperationException("The equipment record no longer exists; the return was not committed.");
+        try { await tx.CommitAsync(cancellationToken); }
+        catch (Exception ex)
+        {
+            throw new CommitOutcomeUnknownException("The return commit could not be confirmed. Do not retry yet; reconnect and refresh the borrowing list first.", ex);
+        }
     }
 
     public async Task<int> CountActiveByStudentAsync(
@@ -111,6 +117,9 @@ public sealed class EfBorrowingRepository(
             var items = await db.Equipment.Where(e => equipmentIds.Contains(e.Id)).OrderBy(e => e.Id).ToListAsync(cancellationToken);
             if (items.Count != equipmentIds.Count) throw new InvalidOperationException("One or more selected equipment records no longer exist.");
             if (items.Any(e => !e.IsAvailable)) throw new InvalidOperationException("One or more selected items are no longer available. Refresh and try again.");
+            var alreadyActive = await db.Borrowings.AnyAsync(b => b.Status == BorrowingStatus.Active
+                && equipmentIds.Contains(EF.Property<int>(b, "EquipmentId")), cancellationToken);
+            if (alreadyActive) throw new InvalidOperationException("One or more selected items already have an active borrowing. Refresh the equipment list.");
 
             foreach (var item in items)
             {
