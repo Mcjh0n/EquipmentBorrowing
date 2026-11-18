@@ -281,6 +281,56 @@ Local verification results are recorded in [docs/persistence-verification.md](do
 6. **Why use `AsNoTracking()` for display queries?** It avoids change-tracking work for entities that the operation only reads.
 7. **What if SQLite were replaced?** The Infrastructure configuration and repository implementations would change; the Domain, application services, and ViewModels could continue using the same interfaces and workflows.
 
+## 7. Laboratory Activity 4 - PostgreSQL and Advanced Workflows
+
+Activity 4 transitions the operational database to PostgreSQL. The Activity 3 sections above document the earlier SQLite milestone; Activity 4 runs only the PostgreSQL provider. Npgsql EF Core provider 10.0.3 targets EF Core 10 and is used with the project's .NET 10 target.
+
+### Prerequisites and secret-free connection setup
+
+Install PostgreSQL locally and create an empty database named `equipment_borrowing`. The app reads the connection string from the `EquipmentBorrowing__ConnectionString` environment variable, so credentials are not stored in the repository. In PowerShell, set it for the current terminal session (replace the example password locally):
+
+```powershell
+$env:EquipmentBorrowing__ConnectionString = "Host=localhost;Port=5432;Database=equipment_borrowing;Username=postgres;Password=YOUR_LOCAL_PASSWORD"
+```
+
+Do not commit the actual password. The design-time factory uses a localhost placeholder solely to scaffold migrations; runtime startup requires the environment variable.
+
+### Migrations, initial data, and run
+
+```powershell
+dotnet tool restore
+dotnet tool run dotnet-ef database update `
+  --project src/EquipmentBorrowing.Infrastructure `
+  --startup-project src/EquipmentBorrowing.Desktop
+dotnet build EquipmentBorrowing.slnx
+dotnet run --project src/EquipmentBorrowing.Desktop
+```
+
+For future model changes, create a migration first:
+
+```powershell
+dotnet tool run dotnet-ef migrations add DescribeChange `
+  --project src/EquipmentBorrowing.Infrastructure `
+  --startup-project src/EquipmentBorrowing.Desktop `
+  --output-dir Persistence/Migrations
+```
+
+`DatabaseInitializer` applies migrations and inserts sample rows only when the corresponding table is empty. It does not reset an existing database. The app does not import data from the old Activity 3 SQLite file; simultaneous SQLite support and historical row transfer were outside the Activity 4 requirements.
+
+### Activity 4 architecture and integrity
+
+The operational path remains Avalonia View → MVVM ViewModel → Application Service → repository interface → EF Core/Npgsql Infrastructure → PostgreSQL. Repositories create a short-lived context per operation. Histories and search are asynchronous. Multi-item checkout uses a serializable PostgreSQL transaction, revalidates current student eligibility, active count, equipment references, and availability, then commits all borrowings and item state changes together. PostgreSQL also enforces normalized unique student/equipment identifiers, foreign keys, date/status check constraints, and a filtered unique index that allows at most one active borrowing per item. A transaction failure rolls back as one unit.
+
+Student and equipment records have stable integer IDs, normalized identity keys, optional descriptive details, and no required hard-delete workflow. Borrowing history keeps active and returned rows; returns set the actual return date and restore availability. The multi-item transaction is all-or-nothing; if the connection drops during commit and the outcome is uncertain, refresh the database state before deciding what to do and do not retry automatically.
+
+### Use cases and traceability
+
+The required catalog and use-case diagram are in [docs/activity4-use-case-catalog.md](docs/activity4-use-case-catalog.md). The supplied fourteen-case suite is preserved in [docs/activity4-use-case-suite.docx](docs/activity4-use-case-suite.docx). Business rules are summarized in [docs/activity4-business-rules.md](docs/activity4-business-rules.md), and the scenario-by-scenario acceptance/evidence matrix is [docs/activity4-traceability.md](docs/activity4-traceability.md). Record the observed result and evidence path for each scenario you execute. Use a disposable database for deliberate constraint and failure demonstrations.
+
+PostgreSQL examples for the Activity 4 schema are in [docs/activity4-database-queries.sql](docs/activity4-database-queries.sql).
+
+The Activity 3 screenshots remain historical evidence only. Capture new Activity 4 PostgreSQL screenshots and readbacks after configuring a PostgreSQL server; SQLite screenshots do not establish PostgreSQL behavior.
+
 ### Activity 3 Screenshots
 
 #### Build
