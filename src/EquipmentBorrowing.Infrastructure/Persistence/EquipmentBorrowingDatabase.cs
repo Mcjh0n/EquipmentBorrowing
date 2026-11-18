@@ -2,15 +2,12 @@ namespace EquipmentBorrowing.Infrastructure.Persistence;
 
 public static class EquipmentBorrowingDatabase
 {
-    public static string GetDatabasePath()
+    public static string GetConnectionString()
     {
-        var directory = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "EquipmentBorrowing");
-
-        Directory.CreateDirectory(directory);
-        return Path.Combine(directory, "equipment-borrowing.db");
+        var connectionString = Environment.GetEnvironmentVariable("EquipmentBorrowing__ConnectionString");
+        if (string.IsNullOrWhiteSpace(connectionString))
+            throw new InvalidOperationException(
+                "Set EquipmentBorrowing__ConnectionString to your local PostgreSQL connection string. See README.md.");
+        return connectionString;
     }
-
-    public static string GetConnectionString() => $"Data Source={GetDatabasePath()}";
 }

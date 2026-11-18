@@ -9,7 +9,8 @@ public sealed class EquipmentBorrowingDbContextFactory
     public EquipmentBorrowingDbContext CreateDbContext(string[] args)
     {
         var options = new DbContextOptionsBuilder<EquipmentBorrowingDbContext>()
-            .UseSqlite(EquipmentBorrowingDatabase.GetConnectionString())
+            .UseNpgsql(Environment.GetEnvironmentVariable("EquipmentBorrowing__ConnectionString")
+                ?? "Host=localhost;Database=equipment_borrowing;Username=postgres;Password=postgres")
             .Options;
 
         return new EquipmentBorrowingDbContext(options);

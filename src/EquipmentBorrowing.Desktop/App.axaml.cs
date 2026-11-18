@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -27,7 +28,7 @@ public partial class App : Avalonia.Application
 
         services.AddDbContextFactory<EquipmentBorrowingDbContext>(options =>
             options
-                .UseSqlite(EquipmentBorrowingDatabase.GetConnectionString())
+                .UseNpgsql(EquipmentBorrowingDatabase.GetConnectionString())
                 .LogTo(message => System.Diagnostics.Trace.WriteLine(message)));
 
         services.AddTransient<IStudentRepository, EfStudentRepository>();
@@ -37,25 +38,37 @@ public partial class App : Avalonia.Application
         services.AddTransient<BorrowEquipmentService>();
         services.AddTransient<ReturnEquipmentService>();
         services.AddTransient<BorrowingLookupService>();
+        services.AddTransient<StudentManagementService>();
+        services.AddTransient<EquipmentManagementService>();
+        services.AddTransient<MultiItemCheckoutService>();
 
         services.AddTransient<MainViewModel>();
         services.AddTransient<EquipmentViewModel>();
         services.AddTransient<BorrowingsViewModel>();
+        services.AddTransient<ManagementViewModel>();
 
         _serviceProvider = services.BuildServiceProvider();
 
-        using (var dbContext = _serviceProvider
-                   .GetRequiredService<IDbContextFactory<EquipmentBorrowingDbContext>>()
-                   .CreateDbContext())
+        string? startupMessage = null;
+        try
         {
+            using var dbContext = _serviceProvider
+                .GetRequiredService<IDbContextFactory<EquipmentBorrowingDbContext>>()
+                .CreateDbContext();
             DatabaseInitializer.InitializeAsync(dbContext).GetAwaiter().GetResult();
+        }
+        catch (Exception)
+        {
+            startupMessage = "PostgreSQL is unavailable or not configured. Set EquipmentBorrowing__ConnectionString, then use Retry Database after the server is ready.";
         }
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+            mainViewModel.StartupMessage = startupMessage ?? string.Empty;
             desktop.MainWindow = new MainWindow
             {
-                DataContext = _serviceProvider.GetRequiredService<MainViewModel>()
+                DataContext = mainViewModel
             };
 
             desktop.Exit += (_, _) => _serviceProvider.Dispose();
