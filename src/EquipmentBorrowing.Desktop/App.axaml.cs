@@ -49,27 +49,18 @@ public partial class App : Avalonia.Application
 
         _serviceProvider = services.BuildServiceProvider();
 
-        string? startupMessage = null;
-        try
-        {
-            using var dbContext = _serviceProvider
-                .GetRequiredService<IDbContextFactory<EquipmentBorrowingDbContext>>()
-                .CreateDbContext();
-            DatabaseInitializer.InitializeAsync(dbContext).GetAwaiter().GetResult();
-        }
-        catch (Exception)
-        {
-            startupMessage = "PostgreSQL is unavailable or not configured. Set EquipmentBorrowing__ConnectionString, then use Retry Database after the server is ready.";
-        }
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-            mainViewModel.StartupMessage = startupMessage ?? string.Empty;
-            desktop.MainWindow = new MainWindow
+            mainViewModel.StartupMessage = "Connecting to PostgreSQL...";
+            var mainWindow = new MainWindow
             {
                 DataContext = mainViewModel
             };
+            desktop.MainWindow = mainWindow;
+
+            mainWindow.Opened += async (_, _) =>
+                await mainViewModel.RetryDatabaseCommand.ExecuteAsync(null);
 
             desktop.Exit += (_, _) => _serviceProvider.Dispose();
         }
