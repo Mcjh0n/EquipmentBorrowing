@@ -330,7 +330,61 @@ The required catalog and use-case diagram are in [docs/activity4-use-case-catalo
 PostgreSQL examples for the Activity 4 schema are in [docs/activity4-database-queries.sql](docs/activity4-database-queries.sql).
 The complete PostgreSQL schema script generated from both EF Core migrations is in [docs/activity4-postgresql-schema.sql](docs/activity4-postgresql-schema.sql). It can be used to review the tables, constraints, indexes, and migration history entries without connecting to a server.
 
-The Activity 3 screenshots remain historical evidence only. Capture new Activity 4 PostgreSQL screenshots and readbacks after configuring a PostgreSQL server; SQLite screenshots do not establish PostgreSQL behavior.
+The Activity 3 screenshots below remain historical evidence. The following Activity 4 screenshots show PostgreSQL data and application workflows.
+
+### Activity 4 Screenshots
+
+#### PostgreSQL table list
+
+![Activity 4 PostgreSQL tables](docs/screenshots/activity4%20screenshots/PostgreSQLtables.png)
+
+#### Stored students
+
+![Activity 4 student records in PostgreSQL](docs/screenshots/activity4%20screenshots/activity4-students.png)
+
+#### Stored equipment
+
+![Activity 4 equipment records in PostgreSQL](docs/screenshots/activity4%20screenshots/activity4-equipment.png)
+
+#### Stored borrowings
+
+![Activity 4 borrowing records in PostgreSQL](docs/screenshots/activity4%20screenshots/activity4-borrowings.png)
+
+#### Multi-item checkout screen
+
+This capture shows the checkout screen while no equipment items were available.
+
+![Activity 4 multi-item checkout screen with no available equipment](docs/screenshots/activity4%20screenshots/activity4-multi-item-checkout.png)
+
+#### Multi-item borrowing records
+
+![Activity 4 multi-item borrowing rows read back from PostgreSQL](docs/screenshots/activity4%20screenshots/activity4-multi-item-records.png)
+
+#### App relaunch command
+
+This capture shows the command used to relaunch the desktop app; it does not show the app state after restart.
+
+![Activity 4 desktop relaunch command](docs/screenshots/activity4%20screenshots/activity4-borrow-after-restart.png)
+
+#### History and search screen
+
+![Activity 4 borrowing history and search screen](docs/screenshots/activity4%20screenshots/activity4-history-search.png)
+
+#### Return database readback
+
+![Activity 4 borrowing records after a return](docs/screenshots/activity4%20screenshots/activity4-return-success.png)
+
+#### Returned borrowing records
+
+![Activity 4 returned borrowing rows with return dates](docs/screenshots/activity4%20screenshots/activity4-returned-record.png)
+
+#### Successful build
+
+![Activity 4 successful .NET build](docs/screenshots/activity4%20screenshots/activity4-build.png)
+
+#### Git history
+
+![Activity 4 Git history](docs/screenshots/activity4%20screenshots/activity4-git-history.png)
 
 ### Activity 3 Screenshots
 
