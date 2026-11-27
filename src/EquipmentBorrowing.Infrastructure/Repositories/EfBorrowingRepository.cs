@@ -134,6 +134,8 @@ public sealed class EfBorrowingRepository(
             }
 
             await db.SaveChangesAsync(cancellationToken);
+            if (Environment.GetEnvironmentVariable("EquipmentBorrowing__AcceptanceFault") == "after-save" && db.Database.GetDbConnection().Database.EndsWith("_lab5_acceptance", StringComparison.Ordinal))
+                throw new IOException("Controlled acceptance failure after writes, before commit.");
             try
             {
                 await tx.CommitAsync(cancellationToken);
@@ -191,4 +193,5 @@ public sealed class EfBorrowingRepository(
         return await ordered.ThenBy(b => b.Id).ToListAsync(ct);
     }
 }
+
 

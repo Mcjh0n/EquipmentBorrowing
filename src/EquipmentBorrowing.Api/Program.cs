@@ -43,11 +43,13 @@ app.UseStatusCodePages(async ctx => {
 });
 app.MapControllers();
 app.MapOpenApi();
-if (args.Contains("--initialize")) {
+if (args.Contains("--initialize") || args.Contains("--reset-acceptance")) {
     using var scope = app.Services.CreateScope();
     await using var db = scope.ServiceProvider.GetRequiredService<IDbContextFactory<EquipmentBorrowingDbContext>>().CreateDbContext();
-    await DatabaseInitializer.InitializeAsync(db);
+    if(args.Contains("--reset-acceptance")) await AcceptanceDataset.ResetAsync(db);
+    else await DatabaseInitializer.InitializeAsync(db);
     return;
 }
 app.Run();
+
 
