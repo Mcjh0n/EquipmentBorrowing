@@ -62,7 +62,7 @@
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="8" IsVisible="{Binding IsDatabaseUnavailable}">
                         <TextBlock Text="{Binding StartupMessage}" TextWrapping="Wrap" />
-                        <Button Content="Retry Database" Command="{Binding RetryDatabaseCommand}" />
+                        <Button Content="Retry API" Command="{Binding RetryDatabaseCommand}" />
                     </StackPanel>
 
                     <ContentControl Grid.Row="3"
@@ -72,3 +72,4 @@
         </Grid>
     </Grid>
 </Window>
+

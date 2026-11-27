@@ -2,8 +2,6 @@ using System;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EquipmentBorrowing.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 namespace EquipmentBorrowing.Desktop.ViewModels;
 
@@ -12,7 +10,6 @@ public partial class MainViewModel : ViewModelBase
     private readonly EquipmentViewModel _equipmentViewModel;
     private readonly BorrowingsViewModel _borrowingsViewModel;
     private readonly ManagementViewModel _managementViewModel;
-    private readonly IDbContextFactory<EquipmentBorrowingDbContext> _contextFactory;
 
     [ObservableProperty]
     private string currentSection = "Equipment";
@@ -27,13 +24,12 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel(
         EquipmentViewModel equipmentViewModel,
         BorrowingsViewModel borrowingsViewModel,
-        ManagementViewModel managementViewModel,
-        IDbContextFactory<EquipmentBorrowingDbContext> contextFactory)
+        ManagementViewModel managementViewModel
+        )
     {
         _equipmentViewModel = equipmentViewModel;
         _borrowingsViewModel = borrowingsViewModel;
         _managementViewModel = managementViewModel;
-        _contextFactory = contextFactory;
         CurrentView = _equipmentViewModel;
     }
 
@@ -77,14 +73,15 @@ public partial class MainViewModel : ViewModelBase
     {
         try
         {
-            await using var db = await _contextFactory.CreateDbContextAsync();
-            await DatabaseInitializer.InitializeAsync(db);
             StartupMessage = string.Empty;
             await _equipmentViewModel.LoadAsync();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            StartupMessage = "Database connection failed. Check the PostgreSQL service and connection setting, then retry.";
+            StartupMessage = UserFacingError.From(ex);
         }
     }
 }
+
+
+

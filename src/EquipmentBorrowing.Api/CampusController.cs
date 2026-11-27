@@ -8,7 +8,7 @@ namespace EquipmentBorrowing.Api;
 
 [ApiController, Route("api/v1")]
 [ProducesResponseType<ApiError>(400), ProducesResponseType<ApiError>(404), ProducesResponseType<ApiError>(409), ProducesResponseType<ApiError>(500)]
-public class CampusController(IStudentRepository students, IEquipmentRepository equipment, IBorrowingRepository borrowings, StudentManagementService studentService, EquipmentManagementService equipmentService, BorrowingLookupService lookup) : ControllerBase {
+public class CampusController(IStudentRepository students, IEquipmentRepository equipment, IBorrowingRepository borrowings, StudentManagementService studentService, EquipmentManagementService equipmentService, BorrowingLookupService lookup, ApiBorrowingService workflow) : ControllerBase {
     [HttpGet("students"), ProducesResponseType<StudentDto[]>(200)]
     public async Task<IActionResult> Students([FromQuery] string? search, CancellationToken ct) {
         var rows = await students.GetAllAsync(ct); var term=search?.Trim();
@@ -47,21 +47,19 @@ public class CampusController(IStudentRepository students, IEquipmentRepository 
     [HttpPost("borrowings"), ProducesResponseType<BorrowingDto>(201)]
     public async Task<IActionResult> Borrow(BorrowRequest input,CancellationToken ct) {
         ValidateDate(input.ExpectedReturnDate!.Value);
-        var rows=await borrowings.CheckoutManyAsync(input.StudentId!.Value,[input.EquipmentId!.Value],input.ExpectedReturnDate.Value,ct);
+        var rows=await workflow.CheckoutAsync(input.StudentId!.Value,[input.EquipmentId!.Value],input.ExpectedReturnDate.Value,false,ct);
         return Created($"/api/v1/borrowings/{rows[0].Id}",rows[0].Dto());
     }
     [HttpPost("checkout-requests"), ProducesResponseType<CheckoutResponse>(201)]
     public async Task<IActionResult> Checkout(CheckoutRequest input,CancellationToken ct) {
         if(input.EquipmentIds.Length<2 || input.EquipmentIds.Distinct().Count()!=input.EquipmentIds.Length) throw new ArgumentException("Select at least two distinct equipment items.");
         ValidateDate(input.ExpectedReturnDate!.Value);
-        var rows=await borrowings.CheckoutManyAsync(input.StudentId!.Value,input.EquipmentIds,input.ExpectedReturnDate.Value,ct);
+        var rows=await workflow.CheckoutAsync(input.StudentId!.Value,input.EquipmentIds,input.ExpectedReturnDate.Value,true,ct);
         return StatusCode(201,new CheckoutResponse(rows.Select(b=>b.Dto()).ToArray()));
     }
     [HttpPost("borrowings/{id}/return"), ProducesResponseType<BorrowingDto>(200)]
     public async Task<IActionResult> Return(int id,ReturnRequest input,CancellationToken ct) {
-        var row=await borrowings.GetByIdAsync(id,ct) ?? throw new KeyNotFoundException("Borrowing not found.");
-        if(row.Status==BorrowingStatus.Returned) throw new BusinessConflictException("This equipment has already been returned.");
-        row.MarkAsReturned(DateOnly.FromDateTime(DateTime.Today)); await borrowings.UpdateAsync(row,ct); return await Borrowing(id,ct);
+        return Ok((await workflow.ReturnAsync(id,ct)).Dto());
     }
     [HttpGet("borrowings"), ProducesResponseType<BorrowingDto[]>(200)]
     public async Task<IActionResult> Borrowings([FromQuery] string? search,[FromQuery] string status="All",[FromQuery] string sort="borrowedDate",[FromQuery] string direction="asc",CancellationToken ct=default) {
@@ -75,3 +73,4 @@ public class CampusController(IStudentRepository students, IEquipmentRepository 
     public async Task<IActionResult> EquipmentHistory(int id,CancellationToken ct) => Ok((await lookup.GetEquipmentHistoryAsync(id,ct)).Select(b=>b.Dto()));
     private static void ValidateDate(DateOnly due) { if(due<=DateOnly.FromDateTime(DateTime.Today)) throw new ArgumentException("Expected return date must be after the server's local date."); }
 }
+

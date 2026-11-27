@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EquipmentBorrowing.Application.Services;
+using EquipmentBorrowing.Desktop.Services;
 using EquipmentBorrowing.Domain;
 
 namespace EquipmentBorrowing.Desktop.ViewModels;
@@ -68,7 +68,7 @@ public partial class BorrowingsViewModel : ViewModelBase
     [RelayCommand]
     private async Task ClearSearchAsync()
     {
-        SearchText = string.Empty; StatusFilter = "Active"; SortField = "DateBorrowed"; SortDescending = false;
+        SearchText = string.Empty; StatusFilter = "All"; SortField = "DateBorrowed"; SortDescending = false;
         SelectedStudentForHistory = null; SelectedEquipmentForHistory = null;
         await LoadAsync();
     }
@@ -122,3 +122,5 @@ public partial class BorrowingsViewModel : ViewModelBase
         }
     }
 }
+
+

@@ -18,6 +18,7 @@ builder.Services.AddTransient<IBorrowingRepository, EfBorrowingRepository>();
 builder.Services.AddTransient<StudentManagementService>();
 builder.Services.AddTransient<EquipmentManagementService>();
 builder.Services.AddTransient<BorrowingLookupService>();
+builder.Services.AddTransient<ApiBorrowingService>();
 var app = builder.Build();
 app.Use(async (context, next) => {
     try { await next(); }
@@ -49,3 +50,4 @@ if (args.Contains("--initialize")) {
     return;
 }
 app.Run();
+

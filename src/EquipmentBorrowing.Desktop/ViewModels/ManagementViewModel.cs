@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using EquipmentBorrowing.Application.Services;
+using EquipmentBorrowing.Desktop.Services;
 using EquipmentBorrowing.Domain;
 
 namespace EquipmentBorrowing.Desktop.ViewModels;
@@ -109,3 +109,4 @@ public partial class ManagementViewModel(
         SelectedEquipment = null; EquipmentIdentifier = string.Empty; EquipmentName = string.Empty; EquipmentDescription = string.Empty;
     }
 }
+

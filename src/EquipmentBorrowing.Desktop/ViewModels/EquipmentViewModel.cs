@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EquipmentBorrowing.Domain;
-using EquipmentBorrowing.Application.Services;
+using EquipmentBorrowing.Desktop.Services;
 
 namespace EquipmentBorrowing.Desktop.ViewModels;
 
@@ -47,6 +47,7 @@ public partial class EquipmentViewModel : ViewModelBase
     [RelayCommand]
     public async Task LoadAsync()
     {
+        StatusMessage = "Loading equipment from API...";
         Students.Clear();
         AvailableEquipment.Clear();
         EquipmentCatalog.Clear();
@@ -86,8 +87,9 @@ public partial class EquipmentViewModel : ViewModelBase
         {
             var result = await _multiItemCheckoutService.ExecuteAsync(
                 SelectedStudent.Id, ids, DateOnly.FromDateTime(ExpectedReturnDate.Value.Date));
-            StatusMessage = $"Checked out {result.Count} items atomically for {SelectedStudent.Name}.";
+            var message = $"Checked out {result.Count} items atomically.";
             await LoadAsync();
+            StatusMessage = message;
         }
         catch (Exception ex) { StatusMessage = UserFacingError.From(ex); }
     }
@@ -150,3 +152,5 @@ public sealed class EquipmentChoice(Equipment item) : CommunityToolkit.Mvvm.Comp
     private bool _isSelected;
     public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value); }
 }
+
+
