@@ -29,11 +29,11 @@ public sealed class EfBorrowingRepository(
                 .SetProperty(item => item.Status, BorrowingStatus.Returned)
                 .SetProperty(item => item.ReturnedDate, borrowing.ReturnedDate), cancellationToken);
         if (changed != 1)
-            throw new InvalidOperationException("This borrowing is no longer active. Refresh the list before trying again.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("This borrowing is no longer active. Refresh the list before trying again.");
         var updatedEquipment = await dbContext.Equipment
             .Where(item => item.Id == borrowing.Equipment.Id)
             .ExecuteUpdateAsync(setters => setters.SetProperty(item => item.IsAvailable, true), cancellationToken);
-        if (updatedEquipment != 1) throw new InvalidOperationException("The equipment record no longer exists; the return was not committed.");
+        if (updatedEquipment != 1) throw new EquipmentBorrowing.Application.BusinessConflictException("The equipment record no longer exists; the return was not committed.");
         try { await tx.CommitAsync(cancellationToken); }
         catch (Exception ex)
         {
@@ -100,26 +100,26 @@ public sealed class EfBorrowingRepository(
         CancellationToken cancellationToken = default)
     {
         if (equipmentIds.Count == 0 || equipmentIds.Distinct().Count() != equipmentIds.Count)
-            throw new InvalidOperationException("Select one or more distinct equipment items.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("Select one or more distinct equipment items.");
         if (expectedReturnDate <= DateOnly.FromDateTime(DateTime.Today))
-            throw new InvalidOperationException("Expected return date must be later than today.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("Expected return date must be later than today.");
 
         await using var db = await contextFactory.CreateDbContextAsync(cancellationToken);
         await using var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
         try
         {
             var student = await db.Students.SingleOrDefaultAsync(s => s.Id == studentId, cancellationToken)
-                ?? throw new InvalidOperationException("Student no longer exists.");
-            if (!student.IsAllowedToBorrow) throw new InvalidOperationException("Student is not allowed to borrow.");
+                ?? throw new KeyNotFoundException("Student no longer exists.");
+            if (!student.IsAllowedToBorrow) throw new EquipmentBorrowing.Application.BusinessConflictException("Student is not allowed to borrow.");
             var activeCount = await db.Borrowings.CountAsync(b => EF.Property<int>(b, "StudentId") == studentId && b.Status == BorrowingStatus.Active, cancellationToken);
-            if (activeCount + equipmentIds.Count > 3) throw new InvalidOperationException("This checkout would exceed the limit of three active items.");
+            if (activeCount + equipmentIds.Count > 3) throw new EquipmentBorrowing.Application.BusinessConflictException("This checkout would exceed the limit of three active items.");
 
             var items = await db.Equipment.Where(e => equipmentIds.Contains(e.Id)).OrderBy(e => e.Id).ToListAsync(cancellationToken);
-            if (items.Count != equipmentIds.Count) throw new InvalidOperationException("One or more selected equipment records no longer exist.");
-            if (items.Any(e => !e.IsAvailable)) throw new InvalidOperationException("One or more selected items are no longer available. Refresh and try again.");
+            if (items.Count != equipmentIds.Count) throw new KeyNotFoundException("One or more selected equipment records no longer exist.");
+            if (items.Any(e => !e.IsAvailable)) throw new EquipmentBorrowing.Application.BusinessConflictException("One or more selected items are no longer available. Refresh and try again.");
             var alreadyActive = await db.Borrowings.AnyAsync(b => b.Status == BorrowingStatus.Active
                 && equipmentIds.Contains(EF.Property<int>(b, "EquipmentId")), cancellationToken);
-            if (alreadyActive) throw new InvalidOperationException("One or more selected items already have an active borrowing. Refresh the equipment list.");
+            if (alreadyActive) throw new EquipmentBorrowing.Application.BusinessConflictException("One or more selected items already have an active borrowing. Refresh the equipment list.");
 
             foreach (var item in items)
             {
@@ -191,3 +191,4 @@ public sealed class EfBorrowingRepository(
         return await ordered.ThenBy(b => b.Id).ToListAsync(ct);
     }
 }
+

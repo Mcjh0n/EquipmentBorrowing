@@ -10,7 +10,7 @@ public sealed class StudentManagementService(IStudentRepository students)
         number = number.Trim(); name = name.Trim(); contact = string.IsNullOrWhiteSpace(contact) ? null : contact.Trim();
         Validate(number, name, contact);
         if (await students.IsStudentNumberInUseAsync(Normalize(number), cancellationToken: ct))
-            throw new InvalidOperationException("That student number is already registered.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("That student number is already registered.");
         return await students.AddAsync(new Student(0, number, name, contact), ct);
     }
 
@@ -20,7 +20,7 @@ public sealed class StudentManagementService(IStudentRepository students)
         Validate(number, name, contact);
         var student = await students.GetByIdAsync(id, ct) ?? throw new KeyNotFoundException("Student no longer exists.");
         if (await students.IsStudentNumberInUseAsync(Normalize(number), id, ct))
-            throw new InvalidOperationException("That student number is already registered.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("That student number is already registered.");
         student.UpdateInformation(number, name, contact);
         await students.UpdateAsync(student, ct);
     }
@@ -41,3 +41,4 @@ public sealed class StudentManagementService(IStudentRepository students)
 
     private static string Normalize(string value) => value.Trim().ToUpperInvariant();
 }
+

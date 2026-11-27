@@ -10,7 +10,7 @@ public sealed class EquipmentManagementService(IEquipmentRepository equipment)
         identifier = identifier.Trim(); name = name.Trim(); description = string.IsNullOrWhiteSpace(description) ? null : description.Trim();
         Validate(identifier, name, description);
         if (await equipment.IsIdentifierInUseAsync(Normalize(identifier), cancellationToken: ct))
-            throw new InvalidOperationException("That equipment identifier is already registered.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("That equipment identifier is already registered.");
         return await equipment.AddAsync(new Equipment(0, identifier, name, description), ct);
     }
 
@@ -20,7 +20,7 @@ public sealed class EquipmentManagementService(IEquipmentRepository equipment)
         Validate(identifier, name, description);
         var item = await equipment.GetByIdAsync(id, ct) ?? throw new KeyNotFoundException("Equipment no longer exists.");
         if (await equipment.IsIdentifierInUseAsync(Normalize(identifier), id, ct))
-            throw new InvalidOperationException("That equipment identifier is already registered.");
+            throw new EquipmentBorrowing.Application.BusinessConflictException("That equipment identifier is already registered.");
         item.UpdateInformation(identifier, name, description);
         await equipment.UpdateAsync(item, ct);
     }
@@ -34,3 +34,4 @@ public sealed class EquipmentManagementService(IEquipmentRepository equipment)
 
     private static string Normalize(string value) => value.Trim().ToUpperInvariant();
 }
+
