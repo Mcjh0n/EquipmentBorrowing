@@ -47,6 +47,7 @@ public partial class EquipmentViewModel : ViewModelBase
     [RelayCommand]
     public async Task LoadAsync()
     {
+        try {
         StatusMessage = "Loading equipment from API...";
         Students.Clear();
         AvailableEquipment.Clear();
@@ -75,6 +76,7 @@ public partial class EquipmentViewModel : ViewModelBase
         StatusMessage = EquipmentCatalog.Count == 0
             ? "No equipment is currently available."
             : $"Catalog: {EquipmentCatalog.Count} item(s); {AvailableEquipment.Count} currently available.";
+        } catch (Exception ex) { StatusMessage = UserFacingError.From(ex); }
     }
 
     [RelayCommand]
@@ -152,5 +154,6 @@ public sealed class EquipmentChoice(Equipment item) : CommunityToolkit.Mvvm.Comp
     private bool _isSelected;
     public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value); }
 }
+
 
 
