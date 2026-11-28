@@ -1,0 +1,203 @@
+{
+  "test": "T05 injected failure after SaveChanges before commit",
+  "request": "{\r\n  \"studentId\": 77,\r\n  \"equipmentIds\": [\r\n    129,\r\n    133\r\n  ],\r\n  \"expectedReturnDate\": \"2026-11-29\"\r\n}",
+  "status": 500,
+  "response": "{\"code\":\"server_error\",\"message\":\"The server could not complete the database operation.\"}",
+  "before": {
+    "equipment": [
+      {
+        "Id": 128,
+        "EquipmentIdentifier": "EQ-001",
+        "EquipmentIdentifierNormalized": "EQ-001",
+        "Name": "Camera",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 129,
+        "EquipmentIdentifier": "EQ-002",
+        "EquipmentIdentifierNormalized": "EQ-002",
+        "Name": "Laptop",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 130,
+        "EquipmentIdentifier": "EQ-003",
+        "EquipmentIdentifierNormalized": "EQ-003",
+        "Name": "Projector",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 131,
+        "EquipmentIdentifier": "EQ-004",
+        "EquipmentIdentifierNormalized": "EQ-004",
+        "Name": "Tablet",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 132,
+        "EquipmentIdentifier": "EQ-005",
+        "EquipmentIdentifierNormalized": "EQ-005",
+        "Name": "Microphone",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 133,
+        "EquipmentIdentifier": "EQ-006",
+        "EquipmentIdentifierNormalized": "EQ-006",
+        "Name": "Tripod",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 134,
+        "EquipmentIdentifier": "EQ-007",
+        "EquipmentIdentifierNormalized": "EQ-007",
+        "Name": "Speaker",
+        "Description": null,
+        "IsAvailable": true
+      }
+    ],
+    "borrowings": [
+      {
+        "Id": 80,
+        "StudentId": 74,
+        "EquipmentId": 128,
+        "DateBorrowed": "2026-11-18",
+        "ExpectedReturnDate": "2026-11-26",
+        "ReturnedDate": null,
+        "Status": 0
+      },
+      {
+        "Id": 81,
+        "StudentId": 74,
+        "EquipmentId": 130,
+        "DateBorrowed": "2026-11-19",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": "2026-11-25",
+        "Status": 1
+      },
+      {
+        "Id": 82,
+        "StudentId": 76,
+        "EquipmentId": 131,
+        "DateBorrowed": "2026-11-20",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": null,
+        "Status": 0
+      },
+      {
+        "Id": 83,
+        "StudentId": 76,
+        "EquipmentId": 132,
+        "DateBorrowed": "2026-11-20",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": null,
+        "Status": 0
+      }
+    ]
+  },
+  "after": {
+    "equipment": [
+      {
+        "Id": 128,
+        "EquipmentIdentifier": "EQ-001",
+        "EquipmentIdentifierNormalized": "EQ-001",
+        "Name": "Camera",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 129,
+        "EquipmentIdentifier": "EQ-002",
+        "EquipmentIdentifierNormalized": "EQ-002",
+        "Name": "Laptop",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 130,
+        "EquipmentIdentifier": "EQ-003",
+        "EquipmentIdentifierNormalized": "EQ-003",
+        "Name": "Projector",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 131,
+        "EquipmentIdentifier": "EQ-004",
+        "EquipmentIdentifierNormalized": "EQ-004",
+        "Name": "Tablet",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 132,
+        "EquipmentIdentifier": "EQ-005",
+        "EquipmentIdentifierNormalized": "EQ-005",
+        "Name": "Microphone",
+        "Description": null,
+        "IsAvailable": false
+      },
+      {
+        "Id": 133,
+        "EquipmentIdentifier": "EQ-006",
+        "EquipmentIdentifierNormalized": "EQ-006",
+        "Name": "Tripod",
+        "Description": null,
+        "IsAvailable": true
+      },
+      {
+        "Id": 134,
+        "EquipmentIdentifier": "EQ-007",
+        "EquipmentIdentifierNormalized": "EQ-007",
+        "Name": "Speaker",
+        "Description": null,
+        "IsAvailable": true
+      }
+    ],
+    "borrowings": [
+      {
+        "Id": 80,
+        "StudentId": 74,
+        "EquipmentId": 128,
+        "DateBorrowed": "2026-11-18",
+        "ExpectedReturnDate": "2026-11-26",
+        "ReturnedDate": null,
+        "Status": 0
+      },
+      {
+        "Id": 81,
+        "StudentId": 74,
+        "EquipmentId": 130,
+        "DateBorrowed": "2026-11-19",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": "2026-11-25",
+        "Status": 1
+      },
+      {
+        "Id": 82,
+        "StudentId": 76,
+        "EquipmentId": 131,
+        "DateBorrowed": "2026-11-20",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": null,
+        "Status": 0
+      },
+      {
+        "Id": 83,
+        "StudentId": 76,
+        "EquipmentId": 132,
+        "DateBorrowed": "2026-11-20",
+        "ExpectedReturnDate": "2026-11-29",
+        "ReturnedDate": null,
+        "Status": 0
+      }
+    ]
+  },
+  "unchanged": true
+}

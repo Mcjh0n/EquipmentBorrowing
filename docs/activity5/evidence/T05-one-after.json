@@ -1,0 +1,13 @@
+{"students" : [{"Id":54,"StudentNumber":"ST-100","StudentNumberNormalized":"ST-100","Name":"Ada Cruz","ContactInformation":null,"IsAllowedToBorrow":true}, 
+ {"Id":55,"StudentNumber":"ST-200","StudentNumberNormalized":"ST-200","Name":"Ben Diaz","ContactInformation":null,"IsAllowedToBorrow":false}, 
+ {"Id":56,"StudentNumber":"ST-300","StudentNumberNormalized":"ST-300","Name":"Cara Lim","ContactInformation":null,"IsAllowedToBorrow":true}, 
+ {"Id":57,"StudentNumber":"ST-400","StudentNumberNormalized":"ST-400","Name":"Dani Ong","ContactInformation":null,"IsAllowedToBorrow":true}], "equipment" : [{"Id":93,"EquipmentIdentifier":"EQ-001","EquipmentIdentifierNormalized":"EQ-001","Name":"Camera","Description":null,"IsAvailable":false}, 
+ {"Id":94,"EquipmentIdentifier":"EQ-002","EquipmentIdentifierNormalized":"EQ-002","Name":"Laptop","Description":null,"IsAvailable":true}, 
+ {"Id":95,"EquipmentIdentifier":"EQ-003","EquipmentIdentifierNormalized":"EQ-003","Name":"Projector","Description":null,"IsAvailable":true}, 
+ {"Id":96,"EquipmentIdentifier":"EQ-004","EquipmentIdentifierNormalized":"EQ-004","Name":"Tablet","Description":null,"IsAvailable":false}, 
+ {"Id":97,"EquipmentIdentifier":"EQ-005","EquipmentIdentifierNormalized":"EQ-005","Name":"Microphone","Description":null,"IsAvailable":false}, 
+ {"Id":98,"EquipmentIdentifier":"EQ-006","EquipmentIdentifierNormalized":"EQ-006","Name":"Tripod","Description":null,"IsAvailable":true}, 
+ {"Id":99,"EquipmentIdentifier":"EQ-007","EquipmentIdentifierNormalized":"EQ-007","Name":"Speaker","Description":null,"IsAvailable":true}], "borrowings" : [{"Id":60,"StudentId":54,"EquipmentId":93,"DateBorrowed":"2026-11-18","ExpectedReturnDate":"2026-11-26","ReturnedDate":null,"Status":0}, 
+ {"Id":61,"StudentId":54,"EquipmentId":95,"DateBorrowed":"2026-11-19","ExpectedReturnDate":"2026-11-29","ReturnedDate":"2026-11-25","Status":1}, 
+ {"Id":62,"StudentId":56,"EquipmentId":96,"DateBorrowed":"2026-11-20","ExpectedReturnDate":"2026-11-29","ReturnedDate":null,"Status":0}, 
+ {"Id":63,"StudentId":56,"EquipmentId":97,"DateBorrowed":"2026-11-20","ExpectedReturnDate":"2026-11-29","ReturnedDate":null,"Status":0}]}

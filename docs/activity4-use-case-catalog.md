@@ -13,13 +13,13 @@ Primary actor for the required workflows: **Laboratory Staff / Equipment Custodi
 | UC-07 | View Student Borrowing History | Required new |
 | UC-08 | View Equipment Borrowing History | Required new |
 | UC-09 | Search, Filter, and Sort Borrowings | Required new |
-| UC-10–11 | Overdue Borrowings; Current Equipment Holder | Deferred to Activity 5 |
+| UC-10–11 | Overdue Borrowings; Current Equipment Holder | Deferred; outside the supplied Activity 5 baseline |
 | UC-12 | Register Student | Required new |
 | UC-13 | Update Student Information | Required new |
 | UC-14 | Change Student Borrowing Eligibility | Required new |
 | UC-15 | Register Equipment | Required new |
 | UC-16 | Update Equipment Information | Required new |
-| UC-17–27 | Equipment retirement, maintenance, condition, renewals, bulk returns, summaries, categories and voiding | Deferred to Activity 5 |
+| UC-17–27 | Equipment retirement, maintenance, condition, renewals, bulk returns, summaries, categories and voiding | Deferred; outside the supplied Activity 5 baseline |
 | UC-28–33 | Reservations, staff accounts, audit and exports/integrations | Future scope |
 
 ## Use Case Diagram
@@ -58,3 +58,4 @@ flowchart LR
   Staff --- UC15
   Staff --- UC16
 ```
+

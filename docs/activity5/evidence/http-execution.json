@@ -1,0 +1,1271 @@
+[
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":18,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":20,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:12.9161295+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":30,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":33,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":31,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":35,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":32,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":34,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:12.9382256+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":30,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":33,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":31,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":35,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":32,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":34,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.0999734+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment?available=true",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":30,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":31,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":35,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":34,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1082734+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":18,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":20,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1150146+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students/17",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1215193+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment/29",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1285359+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":17,\"studentId\":17,\"equipmentId\":29,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":18,\"studentId\":17,\"equipmentId\":31,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":31,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":19,\"studentId\":19,\"equipmentId\":32,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":32,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":20,\"studentId\":19,\"equipmentId\":33,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":33,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1359775+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students/17/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":18,\"studentId\":17,\"equipmentId\":31,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":31,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":17,\"studentId\":17,\"equipmentId\":29,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1447665+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students/20/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1531210+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment/29/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":17,\"studentId\":17,\"equipmentId\":29,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1614335+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "borrowings?status=Active",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":17,\"studentId\":17,\"equipmentId\":29,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":17,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":29,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":19,\"studentId\":19,\"equipmentId\":32,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":32,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":20,\"studentId\":19,\"equipmentId\":33,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":19,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":33,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1692127+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students/2147483647",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"Student not found.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.1779333+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment/2147483647",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"Equipment not found.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.3404057+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "borrowings/2147483647",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"Borrowing not found.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.6248965+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "students/2147483647/borrowings",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"The selected student no longer exists. Refresh the list.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.9571389+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "equipment/2147483647/borrowings",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"The selected equipment no longer exists. Refresh the list.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.9647949+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "GET",
+    "path": "missing",
+    "request": null,
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"Route not found.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.9702148+08:00"
+  },
+  {
+    "test": "T01",
+    "method": "DELETE",
+    "path": "equipment",
+    "request": null,
+    "expected": 405,
+    "status": 405,
+    "body": "{\"code\":\"method_not_allowed\",\"message\":\"HTTP method not allowed.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:13.9768938+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":22,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":23,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":24,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:17.6153655+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":36,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":37,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":40,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":38,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":42,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":39,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":41,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:17.6229671+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "students",
+    "request": {
+      "fullName": "Evan Test",
+      "contact": null,
+      "studentNumber": "ST-500"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"id\":25,\"studentNumber\":\"ST-500\",\"fullName\":\"Evan Test\",\"contact\":null,\"isEligible\":true}",
+    "location": [
+      "/api/v1/students/25"
+    ],
+    "timestamp": "2026-11-27T22:32:18.0596540+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "GET",
+    "path": "students/25",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":25,\"studentNumber\":\"ST-500\",\"fullName\":\"Evan Test\",\"contact\":null,\"isEligible\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.0680004+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "PUT",
+    "path": "students/25",
+    "request": {
+      "fullName": "Evan Updated",
+      "contact": "test@example.edu",
+      "studentNumber": "ST-500"
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":25,\"studentNumber\":\"ST-500\",\"fullName\":\"Evan Updated\",\"contact\":\"test@example.edu\",\"isEligible\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.1513164+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "students",
+    "request": {
+      "studentNumber": " st-100 ",
+      "fullName": "Duplicate"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"That student number is already registered.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.1616942+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "students",
+    "request": {
+      "studentNumber": "ST-600",
+      "fullName": " "
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Check the JSON fields, required values, and date format (YYYY-MM-DD).\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.1701572+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "PATCH",
+    "path": "students/21/eligibility",
+    "request": {
+      "isEligible": false
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":false}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.1966225+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 21,
+      "equipmentId": 37,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"Student is not allowed to borrow.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.5414757+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "GET",
+    "path": "students/21/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":22,\"studentId\":21,\"equipmentId\":38,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":false},\"equipment\":{\"id\":38,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":21,\"studentId\":21,\"equipmentId\":36,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":false},\"equipment\":{\"id\":36,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.5498990+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "borrowings/21/return",
+    "request": {},
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":21,\"studentId\":21,\"equipmentId\":36,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":\"2026-11-27\",\"status\":\"Returned\",\"student\":{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":false},\"equipment\":{\"id\":36,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":true}}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.6385956+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "PATCH",
+    "path": "students/21/eligibility",
+    "request": {
+      "isEligible": true
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.6508549+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "PATCH",
+    "path": "students/21/eligibility",
+    "request": {
+      "isEligible": true
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:18.6648894+08:00"
+  },
+  {
+    "test": "T02",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 21,
+      "equipmentId": 37,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"id\":25,\"studentId\":21,\"equipmentId\":37,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":21,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":37,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}}",
+    "location": [
+      "/api/v1/borrowings/25"
+    ],
+    "timestamp": "2026-11-27T22:32:19.1919931+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":26,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":27,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":28,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":29,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:22.7814360+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":43,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":44,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":47,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":45,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":49,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":46,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":48,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:22.7873191+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "POST",
+    "path": "equipment",
+    "request": {
+      "name": "Monitor",
+      "equipmentCode": "EQ-008",
+      "description": null
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"id\":50,\"equipmentCode\":\"EQ-008\",\"name\":\"Monitor\",\"description\":null,\"isAvailable\":true}",
+    "location": [
+      "/api/v1/equipment/50"
+    ],
+    "timestamp": "2026-11-27T22:32:23.2124281+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "GET",
+    "path": "equipment/50",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":50,\"equipmentCode\":\"EQ-008\",\"name\":\"Monitor\",\"description\":null,\"isAvailable\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.2268908+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "PUT",
+    "path": "equipment/43",
+    "request": {
+      "name": "Camera updated",
+      "equipmentCode": "EQ-001",
+      "description": null
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":43,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera updated\",\"description\":null,\"isAvailable\":false}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.3206160+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "PUT",
+    "path": "equipment/50",
+    "request": {
+      "name": "Monitor updated",
+      "equipmentCode": "EQ-008",
+      "description": null
+    },
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":50,\"equipmentCode\":\"EQ-008\",\"name\":\"Monitor updated\",\"description\":null,\"isAvailable\":true}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.3537954+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "POST",
+    "path": "equipment",
+    "request": {
+      "name": "Duplicate",
+      "equipmentCode": " eq-001 "
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"That equipment identifier is already registered.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.3867080+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "PUT",
+    "path": "equipment/43",
+    "request": {
+      "name": " ",
+      "equipmentCode": "EQ-001",
+      "description": null
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Check the JSON fields, required values, and date format (YYYY-MM-DD).\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.3908655+08:00"
+  },
+  {
+    "test": "T03",
+    "method": "PUT",
+    "path": "equipment/43",
+    "request": {
+      "name": "Camera",
+      "equipmentCode": "EQ-001",
+      "isAvailable": true
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Check the JSON fields, required values, and date format (YYYY-MM-DD).\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:23.3977470+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":30,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":31,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":32,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":33,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:26.8398292+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":51,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":52,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":55,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":53,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":57,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":54,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":56,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:26.8498222+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 33,
+      "equipmentId": 52,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"id\":34,\"studentId\":33,\"equipmentId\":52,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":33,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":52,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}}",
+    "location": [
+      "/api/v1/borrowings/34"
+    ],
+    "timestamp": "2026-11-27T22:32:27.0410146+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "GET",
+    "path": "borrowings/34",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":34,\"studentId\":33,\"equipmentId\":52,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":33,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":52,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.0507499+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 31,
+      "equipmentId": 56,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"Student is not allowed to borrow.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.3176264+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 33,
+      "equipmentId": 51,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"One or more selected items are no longer available. Refresh and try again.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.3326590+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 2147483647,
+      "equipmentId": 56,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"Student no longer exists.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.3447140+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 33,
+      "equipmentId": 56,
+      "expectedReturnDate": "2000-01-01"
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Expected return date must be after the server's local date.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.3802611+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings/34/return",
+    "request": {},
+    "expected": 200,
+    "status": 200,
+    "body": "{\"id\":34,\"studentId\":33,\"equipmentId\":52,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-27\",\"status\":\"Returned\",\"student\":{\"id\":33,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":52,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true}}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.3987925+08:00"
+  },
+  {
+    "test": "T04",
+    "method": "POST",
+    "path": "borrowings/34/return",
+    "request": {},
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"This equipment has already been returned.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:27.4082245+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":34,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":35,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":36,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":37,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:30.8830139+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":58,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":59,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":62,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":60,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":64,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":61,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":63,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:30.8908376+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 37,
+      "equipmentIds": [
+        59,
+        63
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"borrowings\":[{\"id\":39,\"studentId\":37,\"equipmentId\":59,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":37,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":59,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}},{\"id\":40,\"studentId\":37,\"equipmentId\":63,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":37,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":63,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":false}}]}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:31.1552474+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":38,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":39,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":40,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":41,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:33.7159575+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":65,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":66,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":69,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":67,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":71,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":68,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":70,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:33.7214136+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "borrowings",
+    "request": {
+      "studentId": 40,
+      "equipmentId": 66,
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"id\":45,\"studentId\":40,\"equipmentId\":66,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":40,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":66,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}}",
+    "location": [
+      "/api/v1/borrowings/45"
+    ],
+    "timestamp": "2026-11-27T22:32:34.0360019+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":42,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":43,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":44,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":45,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:36.6320909+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":72,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":73,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":76,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":74,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":78,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":75,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":77,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:36.6392595+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 42,
+      "equipmentIds": [
+        73,
+        77
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 201,
+    "status": 201,
+    "body": "{\"borrowings\":[{\"id\":50,\"studentId\":42,\"equipmentId\":73,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":42,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":73,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":false}},{\"id\":51,\"studentId\":42,\"equipmentId\":77,\"borrowedDate\":\"2026-11-27\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":42,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":77,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":false}}]}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:37.3139562+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":46,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":47,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":48,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":49,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:40.7748068+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":79,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":80,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":83,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":81,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":85,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":82,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":84,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:40.7812128+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 48,
+      "equipmentIds": [
+        80,
+        84
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"This checkout would exceed the limit of three active items.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:41.1532283+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":50,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":51,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":52,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":53,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:44.3138342+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":86,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":87,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":90,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":88,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":92,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":89,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":91,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:44.3179503+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 53,
+      "equipmentIds": [
+        87,
+        87
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Select at least two distinct equipment items.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:45.0412548+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":54,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":55,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":56,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":57,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:48.6401956+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":93,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":94,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":97,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":95,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":99,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":96,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":98,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:48.6463539+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 57,
+      "equipmentIds": [
+        94
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Select at least two distinct equipment items.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:48.7808361+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":58,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":59,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":60,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":61,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:52.7853609+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":100,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":101,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":104,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":102,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":106,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":103,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":105,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:52.7896964+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 61,
+      "equipmentIds": [
+        100,
+        101
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"One or more selected items are no longer available. Refresh and try again.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:52.9332283+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":62,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":63,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":64,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":65,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:55.6128170+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":107,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":108,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":111,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":109,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":113,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":110,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":112,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:55.6183865+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 63,
+      "equipmentIds": [
+        108,
+        112
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 409,
+    "status": 409,
+    "body": "{\"code\":\"conflict\",\"message\":\"Student is not allowed to borrow.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:32:55.7370968+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":66,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":67,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":68,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":69,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:00.2682842+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":114,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":115,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":118,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":116,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":120,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":117,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":119,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:00.2761263+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 69,
+      "equipmentIds": [
+        115,
+        2147483647
+      ],
+      "expectedReturnDate": "2026-11-29"
+    },
+    "expected": 404,
+    "status": 404,
+    "body": "{\"code\":\"not_found\",\"message\":\"One or more selected equipment records no longer exist.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:01.0953040+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":70,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":71,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":72,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":73,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:03.8883633+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":121,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":122,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":125,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":123,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":127,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":124,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":126,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:03.8964097+08:00"
+  },
+  {
+    "test": "T05",
+    "method": "POST",
+    "path": "checkout-requests",
+    "request": {
+      "studentId": 73,
+      "equipmentIds": [
+        122,
+        126
+      ],
+      "expectedReturnDate": "2000-01-01"
+    },
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Expected return date must be after the server's local date.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:04.0297706+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "students",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},{\"id\":75,\"studentNumber\":\"ST-200\",\"fullName\":\"Ben Diaz\",\"contact\":null,\"isEligible\":false},{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},{\"id\":77,\"studentNumber\":\"ST-400\",\"fullName\":\"Dani Ong\",\"contact\":null,\"isEligible\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:07.5433321+08:00"
+  },
+  {
+    "test": "Setup",
+    "method": "GET",
+    "path": "equipment",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false},{\"id\":129,\"equipmentCode\":\"EQ-002\",\"name\":\"Laptop\",\"description\":null,\"isAvailable\":true},{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false},{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true},{\"id\":134,\"equipmentCode\":\"EQ-007\",\"name\":\"Speaker\",\"description\":null,\"isAvailable\":true},{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false},{\"id\":133,\"equipmentCode\":\"EQ-006\",\"name\":\"Tripod\",\"description\":null,\"isAvailable\":true}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:07.5658851+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "students/74/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:10.9233929+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "students/77/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:10.9385701+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "equipment/128/borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:10.9513772+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?search=aDa",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:10.9884457+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?search=st-100",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:10.9940788+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?search=CAM",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0027992+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?search=no-match",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0086993+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?status=Active",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0146084+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?status=Returned",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0209029+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?status=All",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0280239+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?search=Ada&status=Active&sort=expectedReturnDate&direction=desc",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0473431+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0538994+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?sort=borrowedDate&direction=asc",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0592660+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?sort=borrowedDate&direction=desc",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.0813948+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?sort=expectedReturnDate&direction=asc",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}},{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.1002123+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?sort=expectedReturnDate&direction=desc",
+    "request": null,
+    "expected": 200,
+    "status": 200,
+    "body": "[{\"id\":81,\"studentId\":74,\"equipmentId\":130,\"borrowedDate\":\"2026-11-19\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":\"2026-11-25\",\"status\":\"Returned\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":130,\"equipmentCode\":\"EQ-003\",\"name\":\"Projector\",\"description\":null,\"isAvailable\":true}},{\"id\":82,\"studentId\":76,\"equipmentId\":131,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":131,\"equipmentCode\":\"EQ-004\",\"name\":\"Tablet\",\"description\":null,\"isAvailable\":false}},{\"id\":83,\"studentId\":76,\"equipmentId\":132,\"borrowedDate\":\"2026-11-20\",\"expectedReturnDate\":\"2026-11-29\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":76,\"studentNumber\":\"ST-300\",\"fullName\":\"Cara Lim\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":132,\"equipmentCode\":\"EQ-005\",\"name\":\"Microphone\",\"description\":null,\"isAvailable\":false}},{\"id\":80,\"studentId\":74,\"equipmentId\":128,\"borrowedDate\":\"2026-11-18\",\"expectedReturnDate\":\"2026-11-26\",\"returnedDate\":null,\"status\":\"Active\",\"student\":{\"id\":74,\"studentNumber\":\"ST-100\",\"fullName\":\"Ada Cruz\",\"contact\":null,\"isEligible\":true},\"equipment\":{\"id\":128,\"equipmentCode\":\"EQ-001\",\"name\":\"Camera\",\"description\":null,\"isAvailable\":false}}]",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.1189258+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "borrowings?status=invalid",
+    "request": null,
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Unsupported status, sort, or direction.\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.1227655+08:00"
+  },
+  {
+    "test": "T06",
+    "method": "GET",
+    "path": "equipment?available=invalid",
+    "request": null,
+    "expected": 400,
+    "status": 400,
+    "body": "{\"code\":\"invalid_request\",\"message\":\"Check the JSON fields, required values, and date format (YYYY-MM-DD).\"}",
+    "location": null,
+    "timestamp": "2026-11-27T22:33:11.1292796+08:00"
+  }
+]

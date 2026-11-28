@@ -1,0 +1,16 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  EquipmentBorrowing.Contracts -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Contracts\bin\Debug\net10.0\EquipmentBorrowing.Contracts.dll
+  EquipmentBorrowing.Domain -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Domain\bin\Debug\net10.0\EquipmentBorrowing.Domain.dll
+  EquipmentBorrowing.Application -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Application\bin\Debug\net10.0\EquipmentBorrowing.Application.dll
+  EquipmentBorrowing.Infrastructure -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Infrastructure\bin\Debug\net10.0\EquipmentBorrowing.Infrastructure.dll
+  EquipmentBorrowing.Tests -> C:\Users\John Mark Fuentes\EquipmentBorrowing\tests\EquipmentBorrowing.Tests\bin\Debug\net10.0\EquipmentBorrowing.Tests.dll
+  EquipmentBorrowing.Desktop -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Desktop\bin\Debug\net10.0\EquipmentBorrowing.Desktop.dll
+  EquipmentBorrowing.ConsoleDemo -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.ConsoleDemo\bin\Debug\net10.0\EquipmentBorrowing.ConsoleDemo.dll
+  EquipmentBorrowing.Api -> C:\Users\John Mark Fuentes\EquipmentBorrowing\src\EquipmentBorrowing.Api\bin\Debug\net10.0\EquipmentBorrowing.Api.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.70

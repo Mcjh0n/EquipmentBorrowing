@@ -1,0 +1,154 @@
+[
+  {
+    "name": "T01 catalog seven items",
+    "passed": true
+  },
+  {
+    "name": "T01 available item set",
+    "passed": true
+  },
+  {
+    "name": "T01 OpenAPI sixteen operations",
+    "passed": true
+  },
+  {
+    "name": "T05 success exact added rows",
+    "passed": true
+  },
+  {
+    "name": "T05 success exact active count",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 35 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 37 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 38 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 39 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 40 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "T05 limit-single exact added rows",
+    "passed": true
+  },
+  {
+    "name": "T05 limit-single exact active count",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 41 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 43 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 44 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 45 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "T05 limit-multi exact added rows",
+    "passed": true
+  },
+  {
+    "name": "T05 limit-multi exact active count",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 46 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 48 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 49 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 50 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "Active borrowing 51 equipment unavailable",
+    "passed": true
+  },
+  {
+    "name": "T06 student search membership",
+    "passed": true
+  },
+  {
+    "name": "T06 student search membership",
+    "passed": true
+  },
+  {
+    "name": "T06 equipment search membership",
+    "passed": true
+  },
+  {
+    "name": "T06 empty search array",
+    "passed": true
+  },
+  {
+    "name": "T06 Active membership",
+    "passed": true
+  },
+  {
+    "name": "T06 Returned membership",
+    "passed": true
+  },
+  {
+    "name": "T06 student search membership",
+    "passed": true
+  },
+  {
+    "name": "T06 Active membership",
+    "passed": true
+  },
+  {
+    "name": "T06 expectedReturnDate True stable ordering",
+    "passed": true
+  },
+  {
+    "name": "T06 borrowedDate False stable ordering",
+    "passed": true
+  },
+  {
+    "name": "T06 borrowedDate True stable ordering",
+    "passed": true
+  },
+  {
+    "name": "T06 expectedReturnDate False stable ordering",
+    "passed": true
+  },
+  {
+    "name": "T06 expectedReturnDate True stable ordering",
+    "passed": true
+  },
+  {
+    "name": "T04 same record returned with date",
+    "passed": true
+  },
+  {
+    "name": "T04 equipment available after return",
+    "passed": true
+  }
+]

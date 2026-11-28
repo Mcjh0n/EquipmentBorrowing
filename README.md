@@ -431,3 +431,12 @@ This capture shows the command used to relaunch the desktop app; it does not sho
 #### Successful return
 
 ![Successful equipment return in the Avalonia app](docs/screenshots/return-success-activity3.png)
+
+## 8. Laboratory Activity 5 - REST API integration
+
+Activity 5 adds an independently runnable ASP.NET Core API and makes Avalonia an asynchronous HTTP client. PostgreSQL access and migrations are handled by the API. Follow the [Activity 5 startup and acceptance guide](docs/activity5/README.md) for separate server and desktop commands, the disposable dataset, endpoint contract and evidence.
+
+- [Baseline record](docs/activity5-baseline.md)
+- [Machine-readable OpenAPI](docs/activity5/openapi.json)
+- [Acceptance execution record](docs/activity5/execution.md)
+- [Traceability matrix](docs/activity5/traceability.md)

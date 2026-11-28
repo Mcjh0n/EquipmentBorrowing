@@ -1,0 +1,6 @@
+{
+  "test": "T08 server/database failure",
+  "status": 500,
+  "body": "{\"code\":\"server_error\",\"message\":\"The server could not complete the database operation.\"}",
+  "date": "2026-11-27T22:33:23.2136706+08:00"
+}
